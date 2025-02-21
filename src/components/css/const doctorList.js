@@ -1,0 +1,38 @@
+const doctorList = [
+    {
+      id: 16244,
+      name: "ABZ",
+      fullname: "SomeName",
+      Department: "neurologist",
+      joiningdate: "12-10-2023",
+      lastdate: "-",
+      totalappointment: 310,
+    },
+    {
+      id: 10567,
+      name: "ABC",
+      fullname: "SomeName2",
+      Department: "dentist",
+      joiningdate: "08-9-2010",
+      lastdate: "-",
+      totalappointment: 4225,
+    },
+    {
+      id: 15234,
+      name: "DFG",
+      fullname: "SomeName3",
+      Department: "neurologist",
+      joiningdate: "01-03-2017",
+      lastdate: "-",
+      totalappointment: 2310,
+    },
+    {
+      id: 17898,
+      name: "POI",
+      fullname: "SomeName3",
+      Department: "pediatrician",
+      joiningdate: "16-12-2020",
+      lastdate: "-",
+      totalappointment: 1410,
+    },
+  ];

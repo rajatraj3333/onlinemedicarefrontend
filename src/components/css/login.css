@@ -1,0 +1,68 @@
+/* *{
+    background-color: #ffffff;
+} */
+
+body{
+    background-color: #ffffff;
+}
+.center-box{
+width: 600px;
+height: 400px;
+border-radius: 8px;
+background-color: #ffffff;
+border:0.8px solid     hsla(155, 29%, 65%, 0.88); ;
+transform: translate(-50%,-50%);
+position: absolute;
+top: 55%;
+left: 50%;
+
+}
+.box-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.footer{
+    margin-top: 30px;
+    /* margin-left: 40px; */
+}
+.create{
+    text-decoration: underline;
+    color: blue;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.forgetpass{
+    display: block;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.inputlogin
+{
+width: 80%;
+height: 45px;
+margin-top: 10px;
+border-radius: 4px;
+border: 0.9px solid #EDEDED;
+
+/* border-bottom: 1px solid gray; */
+}
+.inputlogin:first-child{
+    margin-top: 80px;
+}
+.inputlogin::placeholder{
+    font-size: 18px;
+    color:  hsla(155, 29%, 65%, 0.88); 
+}
+
+
+.lgnbtn{
+padding: 13px 29px;
+margin-top: 30px;
+background-color:  hsla(215, 110%, 45%, 0.88);
+border: none;
+border-radius: 8px;
+color: #ffffff;
+cursor: pointer;
+}

@@ -1,0 +1,38 @@
+.settingWrapper{
+    width: 90%;
+    background-color: #eeecec2d;
+    height: auto;
+    margin: 40px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow-x: hidden;    
+}
+
+.settingcontainer
+{
+margin:0px 40px;
+/* box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.393); */
+height: auto;
+width: 90%;
+border-radius: 10px 45px 10px 45px;
+border: 1px solid rgba(128, 128, 128, 0.393);
+}
+.settingTable{
+    padding: 30px;
+    width: 100%;
+}
+
+.settingTable thead {
+    background-color:#333;
+    color: #ffffff;
+}
+.settingTable tr {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.settingTable td{
+    padding: 1px;
+    font-size: 13px;
+}

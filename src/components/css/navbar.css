@@ -1,0 +1,122 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@media screen and (min-width: 1050px) {
+  .nav-menu {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  .nav-menu ul {
+    display: flex;
+    list-style-type: none;
+  }
+  .nav-menu ul li {
+    margin-left: 15px;
+
+    box-sizing: border-box;
+    text-decoration: none;
+  }
+  .nav-menu ul li:nth-child(1n + 3):hover {
+    cursor: pointer;
+    border-bottom: 3px solid #65b031;
+  }
+  .nav-menu ul li button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px;
+    margin-top: -15px;
+    border-radius: 5px;
+  }
+  .nav-menu ul li button:hover {
+    cursor: pointer;
+    color: #f4f4f4;
+    background-color: #65b031;
+  }
+
+  .logo{
+    align-items: center;
+  }
+  .logo::after {
+    content: "Logo";
+  }
+  i{
+    display: none;
+  }
+
+}
+
+
+
+@media screen and (max-width:1100px) {
+  
+
+.navbar {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  border-bottom: 1px solid #f1f1f1;
+  z-index:100;
+  position: relative;
+}
+
+
+.nav-menu {
+  background-color: #65b031;
+  width: 70%;
+  height: 100vh;
+  display: none;
+  /* margin-top: 20px; */
+  position:absolute;
+  z-index: 1000;
+}
+
+.nav-menu ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  margin-left: -20px;
+  width: 106%;
+  object-fit: cover;
+}
+.nav-menu ul li {
+  background-color: #68a53c;
+  /* margin-top: 40px; */
+  color: #f1f1f1;
+  padding: 20px;
+
+  text-align: center;
+  border-bottom: 1px solid #f1f1f1;
+}
+.btn {
+  padding: 10px;
+}
+
+ i {
+  font-size: 30px;
+  color: #f1f1f1;
+  margin-left: 30px;
+}
+.open {
+  display: block;
+  /* padding: 20px; */
+}
+.nav-menu-open{
+  position: absolute; 
+  z-index: 12;
+  top: 20px;
+}
+
+.close{
+  display: none;
+}
+
+}

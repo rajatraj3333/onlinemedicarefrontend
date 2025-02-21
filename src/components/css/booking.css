@@ -1,0 +1,130 @@
+.bookingcard{
+    border: 1px solid #333;
+    height: 250px;
+    width: 320px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 12px;
+    background-color: #f1f1f1;
+    border: none;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.bkbtn{
+    background-color: #65b031;
+    padding: 10px 0px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    color: #f1f1f1;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+.bkbtn:hover{
+    cursor: pointer;
+}
+
+.reviewSection{
+    margin-top: 10px;
+}
+
+h6{
+    margin-top: 10px;
+}
+
+.doctorimg
+{
+border-radius:100px;
+position: absolute;
+margin-left: 100px;
+margin-top: -50px;
+width: 70px;
+height: 70px;
+display: flex;
+}
+
+.bookingwrapper{
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    margin-left: 40px;
+}
+
+.filtersection{
+   display: flex;
+   justify-content: flex-end;
+   margin-right: 30px;
+   flex-wrap: wrap;
+}
+
+.datetoolTip{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+}
+
+.resetbtn{
+    padding: 4px 18px;
+    background-color: hsla(225, 70%, 53%, 0.88);
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+    color: white;
+
+}
+.resetbtn:hover{
+    background-color: hsla(225, 70%, 53%, 0.607);
+    cursor: pointer;
+}
+
+.cardcontent{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+
+.title>p{
+    margin-block: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.detailedcontent>p{
+    margin-block: 10px;
+    font-size: 14px;
+    margin-left: auto;
+
+}
+
+.filternames, .filterdepartment{
+
+    width: 280px;
+    margin-right: 10px;
+   
+   }
+
+@media screen and (max-width:800px) {
+      .bookingcard{
+        margin-left: auto;
+        margin-right: 40px;
+       
+       }
+
+
+       .bookingwrapper{
+        margin-left: 0px;
+       }
+       .filternames, .filterdepartment{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin: 10px;
+       
+       }
+      
+
+}
