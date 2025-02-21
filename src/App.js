@@ -13,7 +13,7 @@ import Profile from "./components/Profile";
 import Doctor from "./components/Doctor";
 import Login from "./components/Login";
 import PaymentComponent from "./components/Payment";
-import Interview from "./components/Interview";
+
 import {
   useContext,
   useDebugValue,
@@ -69,7 +69,7 @@ function App() {
         <Route path="resetpassword/:url" element={<Resetpassword />} />
         <Route path="doctorregistration" element={<Doctorregistration />} />
         <Route path="table" element={<Table />} />
-        <Route path="int" element={<Interview />} />
+      
       </Routes>
     </div>
   );
