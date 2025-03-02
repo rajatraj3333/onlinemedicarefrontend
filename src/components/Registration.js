@@ -70,6 +70,7 @@ function Registration() {
                 notification.success({
                     message:'Successfully register'
                 })
+                navigate('/login')
                }
 
             else if (res.data.error){

@@ -61,8 +61,7 @@ function Forgetpass() {
       }
       else {
         api.post('auth/verifyotp',data).then(res=>{
-     
-          if(res.data.status===200){
+          if(res.data.url){
       
           const {url} =res.data
          
