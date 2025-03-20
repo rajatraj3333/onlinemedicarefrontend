@@ -7,7 +7,10 @@ import axios from "axios";
     headers: {
       'Content-Type': 'application/json'
     }
-  });
+  }); 
 
 
 export default api
+
+
+// https://omcbackend.onrender.com/api

@@ -1,20 +1,20 @@
 import React, { useEffect, useState,useReducer } from 'react'
 import './css/login.css'
-import api from '../utils/api'
-import Password from 'antd/es/input/Password'
+
 import setauth from '../utils/setauth'
 import { notification } from 'antd'
-import { useContext } from 'react'
-import userContext from './context/usercontext'
+
 import {Link, useNavigate } from 'react-router'
 import Userscred from './Userscred'
-import AuthContext from './context/Authcontext'
-import { useAuth } from './Userprovider'
+import { setloginDetails } from '../redux/slice/userSlice'
+import Api from '../utils/apiconnect'
+import { useDispatch, useSelector } from 'react-redux'
+
 function Login() {
 
-  const {login} = useAuth();
-  const nav = useNavigate();
+  const dispatch = useDispatch();
 
+  const nav = useNavigate();
 
 
 
@@ -42,28 +42,40 @@ function Login() {
    
   ]
 
-  async function validatelogin (data){
+  function validatelogin (data){
     
-   let result = await api.post('/auth/login',data)
-   const {token,roles} = result.data
-   if(token){
+    const {email}=data
+    let promise =  Api.Post('/auth/login',data)
+   
+    
 
-  await  login(data.email);
-    setauth(token);
-    localStorage.setItem('roles',roles);
-    // val.setuserdetails({...val.userdetails,useremail:data.email,token:token})
-  
-   
-   
-   
-    nav('/admin');
+    Api.HandleRequest(promise,function(response,error){
+           if(response!=null){
+            const {data}=response;
+            if("message" in data){
+              console.log(data.message);
+              return;
+            }
 
-   }
-   else{
-    notification.error({
-      message:'invalid credential'
+            const {token,roles} = data
+            if(token){
+           
+            dispatch(
+              setloginDetails({email,token,roles})
+            )
+             setauth(token);
+               nav('/admin');
+         
+            }
+            else{
+             notification.error({
+               message:'invalid credential'
+             })
+            }
+           }
     })
-   }
+
+   
   }
   
 

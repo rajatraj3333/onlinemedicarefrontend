@@ -3,6 +3,7 @@ import Userscred from './Userscred'
 import { notification } from 'antd'
 import api from '../utils/api'
 import { useNavigate } from 'react-router'
+import Api from '../utils/apiconnect'
 function Registration() {
     const navigate = useNavigate();
       let fields= {
@@ -59,33 +60,38 @@ function Registration() {
          delete storedata.firstname
          delete storedata.lastname
          
-        api.post('/auth/register',storedata).then(res=>{
-         
-            if("message" in res.data){
-                notification.error({
-                    message:'User Already Exist'
-                })
-            }
-            else if("token" in res.data){
-                notification.success({
-                    message:'Successfully register'
-                })
-                navigate('/login')
-               }
 
-            else if (res.data.error){
-                notification.error({
-                    message:res.data.error
-                })
-            }
-            else {
-                notification.error({
-                    message:'Something went wrong!'
-                })
-            }
-        }).catch(err=>{
-            console.log(err)
+        const promise =  Api.Post('/auth/register',storedata)
+        Api.HandleRequest(promise,function(response,error){
+             if(response!=null){
+                const {data}=response;
+                const {token,message}=data;
+                if(message){
+                    notification.error({
+                        message:'User Already Exist'
+                    })
+                }
+                else if(token){
+                    notification.success({
+                        message:'Successfully register'
+                    })
+                    navigate('/login')
+                   }
+                   else if (data.error){
+                    notification.error({
+                        message:data.error
+                    })
+                }
+                else {
+                    notification.error({
+                        message:'Something went wrong!'
+                    })
+                }
+             }
+
         })
+
+     
 
     }
     else {

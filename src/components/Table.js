@@ -1,6 +1,9 @@
 import React from 'react'
 import './css/table.css'
+import { useSelector } from 'react-redux'
 function Table() {
+    const us = useSelector(state=>state)
+    console.log(us)
 
     let doctorlist =[
         {

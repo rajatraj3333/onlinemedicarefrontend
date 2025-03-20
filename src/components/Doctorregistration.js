@@ -5,6 +5,7 @@ import Loader from './Loader'
 import api from '../utils/api'
 
 import { useNavigate } from 'react-router'
+import Api from '../utils/apiconnect'
 
 
 
@@ -71,26 +72,40 @@ if(data.name===''|| data.fullname===''|| data.department ==='' || data.email==='
  return;
  }
  else{
-   api.post('auth/adddoctor',data).then(res=>{
 
-    if(res.data.error){
+ const promise =  Api.Post('auth/adddoctor',data);
+
+ Api.HandleRequest(promise,function (response,error){
+
+  if(response!=null){
+    const {data}=response;
+    if(data.error){
       notification.error({
-        message:res.data.error
+        message:data.error
       })
       return;
     }
-
-         if(res.data.status===200 && res.data.token){
+    if(data.status===200 && data.token){
         
-          notification.success({
-            message:res.data.message +"Please login!"
-          })
-          setTimeout(()=>{
-            navigate('/login')
-          },2000)
-          setdataload(false);
-         }
-   }).catch(err=>console.log(err))
+      notification.success({
+        message:data.message +"Please login!"
+      })
+      setTimeout(()=>{
+        navigate('/login')
+      },2000)
+      setdataload(false);
+     }
+     else {
+      notification.error({
+        message:error
+      })
+      return;
+     }
+  }
+ })
+
+
+
  }
 }
 

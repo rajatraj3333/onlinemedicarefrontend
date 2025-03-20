@@ -4,10 +4,11 @@ import { useNavigate, useParams, useSearchParams } from "react-router";
 import "./css/confirm.css";
 import { Modal, Checkbox, Radio, notification, DatePicker } from "antd";
 import api from "../utils/api";
-import userContext from "./context/usercontext";
+
 import { useAuth } from "./Userprovider";
 import moment from "moment";
 import Loader from "./Loader";
+import { useSelector } from "react-redux";
 function Confirm() {
   const [open, setopen] = useState(false);
   const { id } = useParams();
@@ -35,8 +36,8 @@ function Confirm() {
   ];
 
   const navigate = useNavigate();
-
-
+  const {email}  = useSelector(state=>state.user);
+   
   const onChanges = (e) => {
     let item = [];
  
@@ -90,8 +91,6 @@ function Confirm() {
   }, [date]);
 
   function confirm() {
-    const email = localStorage.getItem('emails');
-
     let data = {
       email: email,
       slottime: Time[0],

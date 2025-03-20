@@ -3,8 +3,11 @@ import { useParams, useNavigate } from "react-router";
 import Userscred from "./Userscred";
 import api from "../utils/api";
 import { notification } from "antd";
+import Api from "../utils/apiconnect";
+import { useSelector } from "react-redux";
 function Resetpassword() {
   const params = useParams();
+  const {email} = useSelector(state=>state.user);
   const navigate = useNavigate();
  
   let fields = {
@@ -31,51 +34,54 @@ function Resetpassword() {
   ];
 
   function changepassword(data) {
+    
+    let message;
+    function errorMessage (msg) {
+          message=msg;
+        console.log(message)
+        notification.error({message:message})
+       
+    }
+  
+    if(data.password.length < 10){  errorMessage("password must be greater than 10 digit")}
+     if (data.password.length > 10 && data.password != data.repassword){errorMessage("password and re-password must match")}
+    
+ 
+      
    
-
-    if (data.password.length < 10 || data.repassword.length < 10) {
-      notification.error({
-        message: "password must be greater than 10 digit",
-      });
-      return;
-    } else if (data.password === data.repassword) {
-      const email = localStorage.getItem("usercredemail");
       let senddata = {
         password: data.password,
         url: params.url,
         email: email,
       };
-      if (email) {
-        api
-          .post("/auth/resetpassword", senddata)
-          .then((res) => {
-           
-            if (res.data.status === 200) {
-              notification.success({
-                message: "successfully password changed",
+      if (email && !message) {
+        const promise = Api.Post("/auth/resetpassword",senddata)
+
+        Api.HandleRequest(promise,function(response,error){
+            if(response!=null){
+               const {data}=response;
+               if (data.status === 200) {
+                notification.success({
+                  message: "successfully password changed",
+                });
+                setTimeout(() => {
+                  navigate("/login");
+                }, 5000);
+              } else {
+                throw "some thing went wrong";
+              }
+            }
+            else {
+              notification.error({
+                message: "can not reset right now try again to reset",
               });
               setTimeout(() => {
-                navigate("/login");
-              }, 5000);
-            } else {
-              throw "some thing went wrong";
+                navigate("/forgetpassword");
+              }, 3000);
             }
-          })
-          .catch((err) => {
-            notification.error({
-              message: "can not reset right now try again to reset",
-            });
-            setTimeout(() => {
-              navigate("/forgetpassword");
-            }, 3000);
-           
-          });
-      }
-    } else {
-      notification.error({
-        message: "password and re-password must match ",
-      });
-      return;
+        })
+       
+      
     }
 
   }

@@ -2,6 +2,7 @@ import React, { createElement, useRef, useState } from "react";
 import { Modal, DatePicker, Select } from "antd";
 import moment from "moment";
 import permission from "../utils/permission";
+import { useSelector } from "react-redux";
 const { Option } = Select;
 function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
   const rolesref = useRef(null);
@@ -15,7 +16,8 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
     department: data.department,
     joiningdate: "",
   });
-  const roles = localStorage.getItem('roles');
+
+  const {roles} = useSelector(state=>state.user);
   function onChange(date) {
     setDates(moment(new Date(date)).format("DD-MM-YYYY"));
     setDetails({

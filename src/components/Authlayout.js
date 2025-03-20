@@ -21,13 +21,12 @@ import { Link } from "react-router";
 import { UserOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import userContext from "./context/usercontext";
-import api from "../utils/api";
-import setauth from "../utils/setauth";
 import permission from "../utils/permission";
+import { useDispatch, useSelector } from "react-redux";
+import { removeDetails } from "../redux/slice/userSlice";
 
-const roles = localStorage.getItem("roles");
-function Lidoctor() {
+
+function Lidoctor({roles}) {
   const [managedropdown, setmanagedropdown] = useState(false);
 
   return (
@@ -102,33 +101,15 @@ function Lidoctor() {
 // }
 
 function Authlayout() {
+  
   const [menuOpen, setmenuOpen] = useState(false);
   const isLogin = true;
   const navigate = useNavigate();
-  const contextvalue = useContext(userContext);
+  const userdetails = useSelector(state=>state.user);
+  const dispatch = useDispatch();
+  const {roles}=userdetails;
 
-  const nav = useNavigate();
-  useEffect(() => {
-    const gettoken = localStorage.getItem("token");
 
-    
-    api
-      .post("/auth/verify", { token: gettoken })
-      .then((res) => {
-        if (res.data.status === 200) {
-         
-          if (gettoken) setauth(gettoken);
-        } else {
-          notification.error({
-            message: "invalid login",
-          });
-          setTimeout(() => {
-            nav("/login");
-          }, 2000);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
   const items = [
     {
       key: "1",
@@ -157,6 +138,7 @@ function Authlayout() {
   ];
   const logout = (e) => {
     localStorage.clear();
+    dispatch(removeDetails());
     navigate("/login");
   };
 
@@ -201,7 +183,7 @@ function Authlayout() {
         <div className={menuOpen ? "sub-menu" : "sub-menu-close"}>
           <div className="menu-item">
             <ul>
-              <Lidoctor />
+              <Lidoctor roles={userdetails.roles}/>
             </ul>
 
             {roles === "Patient" && (

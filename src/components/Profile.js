@@ -1,41 +1,63 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './css/profile.css'
 import {notification } from 'antd'
-import api from '../utils/api'
+
+import Api from '../utils/apiconnect'
+import { useSelector } from 'react-redux'
+
 function Profile() {
 
 
   const [profiledetails,setprofiledetails]=useState('')
-  useEffect(()=>{
-     api.get('/auth/getprofile').then(res=>{
-      if(res.data.status===200){
-        setprofiledetails(res.data.response)
-      }
+  const {email,roles,token}=useSelector(state=>state.user)    
   
-     
-     }).catch(err=>{
-      console.log(err);
-     })
+  useEffect(()=>{
+
+   const promise = Api.Get('/auth/getprofile')
+    console.log(promise);
+   Api.HandleRequest(promise,function(response,error){
+    
+        const {data}=response;
+        if(data.status===200){
+          setprofiledetails(data.response)
+        }
+        else {
+          notification.error({
+            message:error
+          })
+        }
+   })
+
   },[])
 
 
   function save(){
     if(profiledetails.name!=='' && profiledetails.fullname !==''){
-      api.post('/auth/profileupdate',profiledetails).then(res=>{
-       
-        if(res.data.response){
-          notification.success({
-            message:res.data.response
-          })
-        }
-        else
-        {
-          notification.error({
-            message:res.data.response
-          })
-        }
-      
-      }).catch(err=>console.log(err))
+
+
+    const promise =  Api.Post('/auth/profileupdate',profiledetails)
+
+    Api.HandleRequest(promise,function(response,error){
+      const {data}=response;
+      if(data.status===200){
+        notification.success({
+          message:data.response
+        })
+        return;
+      }
+      else if(data.status===500)
+      {
+        notification.error({
+          message:data.response
+        })
+      }
+      else {
+        notification.error({
+          message:error
+        })
+      }
+    
+    })
     }
     else{
       notification.error({

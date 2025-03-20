@@ -6,13 +6,14 @@ import { DatePicker, message, Modal, notification, Select } from "antd";
 import axios from "axios";
 import moment from "moment";
 import api from "../utils/api";
+import Api from "../utils/apiconnect";
+import { useSelector } from "react-redux";
 function Edit({ isopen, setopen, data, updatesave }) {
   const Option = { Select };
 
   const [toupdatedata, settoupdatedata] = useState({ ...data });
   const [lastdate, setlastdate] = useState("");
   const [notavailable, setnotavailable] = useState();
-
 
   function disabledDate(date) {
     return moment() <= date;
@@ -35,11 +36,9 @@ function Edit({ isopen, setopen, data, updatesave }) {
       notavailable:
         notavailable != undefined ? notavailable : data.notavailable,
     };
-    
+
     updatesave(upadted_data);
   }
-
-
 
   return (
     <>
@@ -112,13 +111,15 @@ function Edit({ isopen, setopen, data, updatesave }) {
 
           <div
             className={
-              toupdatedata.roles === "Doctor" ||  toupdatedata.roles === "Associate Doctor"
+              toupdatedata.roles === "Doctor" ||
+              toupdatedata.roles === "Associate Doctor"
                 ? "selectanddate"
                 : "selectanddatewithoutdoc"
             }
             style={{ justifyContent: "space-around" }}
           >
-            {(toupdatedata.roles === "Doctor"  || toupdatedata.roles === "Associate Doctor")  && (
+            {(toupdatedata.roles === "Doctor" ||
+              toupdatedata.roles === "Associate Doctor") && (
               <input
                 type="text"
                 name="fees"
@@ -159,47 +160,6 @@ function Edit({ isopen, setopen, data, updatesave }) {
       </Modal>
     </>
   );
-
-  //   function NotModal({isopen,onclose, setafter, afterselecteddate}){
-
-  //  const [selecteddate,setselecteddate]=useState()
-  //     console.log(selecteddate)
-
-  //     function save(){
-  //       console.log('saved')
-  //       setafter(selecteddate)
-  //       onclose(false)
-  //     }
-  //     return (
-
-  // <Modal open={isopen} onCancel={()=>onclose(false)} onOk={save} >
-  // <DatePicker
-  // defaultPickerValue={[
-  //   "08-01-2025",
-  //   "09-01-2025",
-  //   "10-01-2025",
-  //   "11-01-2025",
-  //   "16-01-2025",
-  //   "17-01-2025",
-  //   "09-02-2025",
-  //   "12-02-2025",
-  //   "14-02-2025",
-  //   "11-03-2025",
-  //   "12-03-2025",
-  //   "14-03-2025",
-  //   "25-03-2025",
-  //   "13-04-2025",
-  //   "16-04-2025",
-  //   "18-04-2025"
-  // ]}
-  // multiple
-  // disabledDate={(date)=>moment()>=date}
-  // onChange={(date)=>setselecteddate(date.map(element=>moment(new Date(element)).format('DD-MM-YYYY')))}
-  // />
-  // <h1>Select date</h1>
-  // </Modal>
-  //     )
-  //   }
 }
 
 function Doctor() {
@@ -210,7 +170,8 @@ function Doctor() {
   const [modeldata, setmodeldata] = useState("");
   const [doctordata, setdoctordata] = useState("");
   const nav = useNavigate();
-  const role = localStorage.getItem("roles");
+  const {roles} = useSelector(state=>state.user);
+
   const edit = (id, type = "edit", e = null) => {
     const findDoctorIndex = doctorlist.findIndex((item) => item.id === id);
     let copyOfDoctorList = [...doctorlist];
@@ -247,17 +208,13 @@ function Doctor() {
     setDoctorList(copyOfDoctorList);
   };
 
-
-
-
-
   const saves = (data) => {
     let updateddata = {
       name: data.names,
       fullname: data.firstlastname,
       email: data.email,
       password: data.password,
-      roles: data.role,
+      roles: data.roles,
       department: data.department,
       joiningdate: data.joiningdate,
       lastdate: "-",
@@ -272,7 +229,6 @@ function Doctor() {
           message: "user alredy exists",
           className: "notify",
         });
-        
       } else if (res.data.hasOwnProperty("error")) {
         notification.error({
           message: "something went wrong",
@@ -293,53 +249,56 @@ function Doctor() {
   const cancelModel = () => seteditModal(false);
 
   function getdoctorlist() {
-    let data;
+    const promise = Api.Get("/doctor/getdoctorlist");
 
-    api.get("/doctor/getdoctorlist").then((res) => {
-      data = res.data;
- 
-      Array.isArray(data.response) &&
+    Api.HandleRequest(promise, function (response, error) {
+      console.log(response);
+      if (response != null && Array.isArray(response.data.response)) {
+        const { data } = response;
         setdoctordata(
           data.response.find((item) => item.doctor_id === item.user_id)
         );
-
-      setDoctorList(res.data.response);
-      // console.log(getdoctorlist);
+        setDoctorList(data.response);
+        return;
+      } else {
+        notification.error({
+          message: error.error,
+        });
+      }
     });
-    return data;
   }
   useEffect(() => {
-   
     getdoctorlist();
     // setDoctorList([]);
   }, []);
 
-  
   function openmodel(id) {
-  
     const data = doctorlist.find((ele) => ele.user_id === id);
     seteditmodal(true);
     doctorlist && setmodeldata(data);
   }
 
   function updatesave(data) {
- 
-
     seteditmodal(false);
-    api.post("/doctor/updatedoctordetails", data).then((res) => {
-    
-      if (res.data.status === 200) {
-        getdoctorlist();
-        notification.success({
-          message: "successfull updated!",
-        });
-      } else {
-        notification.error({
-          message: "session expired!",
-        });
-        setTimeout(() => {
-          nav("/login");
-        }, 2000);
+    const promise = Api.Post("/doctor/updatedoctordetails", data);
+
+    Api.HandleRequest(promise, function (response, error) {
+      if (response != null) {
+        const { status } = response.data;
+
+        if (status === 200) {
+          getdoctorlist();
+          notification.success({
+            message: "successfull updated!",
+          });
+        } else {
+          notification.error({
+            message: error || "session expired!",
+          });
+          setTimeout(() => {
+            nav("/login");
+          }, 2000);
+        }
       }
     });
   }
@@ -355,24 +314,24 @@ function Doctor() {
   };
 
   const handlesearch = delayfn((value) => {
-
     if (value === "") {
-   
       setDoctorList(getdoctorlist());
     } else {
       let findItem = doctorlist.filter(
-        (item) => item.name.toLowerCase().includes(value.toLowerCase()) || item.fullname.toLowerCase().includes(value.toLowerCase())
+        (item) =>
+          item.name.toLowerCase().includes(value.toLowerCase()) ||
+          item.fullname.toLowerCase().includes(value.toLowerCase())
       );
       findItem && setDoctorList([...findItem]);
     }
   });
 
   function eligibletoedit(item) {
-    if (item.roles === role) {
+    if (item.roles === roles) {
       return true;
-    } else if (role === "Doctor") {
+    } else if (roles === "Doctor") {
       return true;
-    } else if (item.roles === "Associate" && role === "Associate Doctor") {
+    } else if (item.roles === "Associate" && roles === "Associate Doctor") {
       return true;
     }
   }
@@ -399,11 +358,11 @@ function Doctor() {
         <input type="text" className="searchinputbox" onChange={handlesearch} />
         <button className="sebtn">Search</button>
 
-{role!=='Associate' &&
-        <button className="addbtn" onClick={() => seteditModal(true)}>
-          Add
-        </button>
-}
+        {roles !== "Associate" && (
+          <button className="addbtn" onClick={() => seteditModal(true)}>
+            Add
+          </button>
+        )}
       </div>
 
       <div className="dashboardWrapper">
@@ -433,14 +392,12 @@ function Doctor() {
 
                     <td name="name">{item.fullname}</td>
 
-                    <td name="name" colSpan={2}>{item.department}</td>
+                    <td name="name" colSpan={2}>
+                      {item.department}
+                    </td>
 
                     <td name="name" style={{ fontSize: "11px" }}>
-                      <div
-                       className="rolesbtn"
-                      >
-                        {item.roles}
-                      </div>
+                      <div className="rolesbtn">{item.roles}</div>
                     </td>
 
                     <td name="name">{item.joiningdate}</td>
@@ -448,7 +405,12 @@ function Doctor() {
                     <td name="name">{item.lastdate}</td>
 
                     <td name="name">{item.totalappointment}</td>
-                    <td name="name"> {(item.roles === "Doctor" || item.roles === "Associate Doctor") && item.fees}</td>
+                    <td name="name">
+                      {" "}
+                      {(item.roles === "Doctor" ||
+                        item.roles === "Associate Doctor") &&
+                        item.fees}
+                    </td>
                     <td>
                       {eligibletoedit(item) && (
                         <button
