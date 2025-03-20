@@ -59,11 +59,11 @@ function Login() {
 
             const {token,roles} = data
             if(token){
-           
+              
+              setauth(token);
             dispatch(
               setloginDetails({email,token,roles})
             )
-             setauth(token);
                nav('/admin');
          
             }
