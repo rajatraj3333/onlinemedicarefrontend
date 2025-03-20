@@ -31,8 +31,7 @@ function Routescomponent({children}) {
      
     const token = localStorage.getItem('token');
     setauth(token);
-    console.log(email,roles);
-
+   
     if(!token){
           
       console.log('ADMIN')
@@ -44,8 +43,8 @@ function Routescomponent({children}) {
          const response = Api.Post('/auth/verify',{token})
          Api.HandleRequest(response,function(data,error){
                   if(data!=null){
-                   console.log(data.data.response);
                    dispatch(setloginDetails(data.data.response))
+                   navigate('/admin');
                   }
          })
         
