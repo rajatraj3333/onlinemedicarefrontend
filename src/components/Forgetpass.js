@@ -42,6 +42,8 @@ function Forgetpass() {
   };
 
   function otpvalidation(data) {
+    
+
 
     if (data.otp === "") {
       
@@ -68,14 +70,16 @@ function Forgetpass() {
     );
     } else {
       const response = Api.Post("auth/verifyotp",{otp:data.otp,email:data.email});
-
+     
+     const {email}=data
       Api.HandleRequest(response, function (response, error) {
         if (response != null) {
           const { data } = response;
       
           if (data.url) {
             const { url } = data;
-
+           
+            localStorage.setItem('email',email);
             
             navigate(`/resetpassword/${Number(url)}`);
           } else {

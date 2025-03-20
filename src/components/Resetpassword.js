@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 function Resetpassword() {
   const params = useParams();
   const {email} = useSelector(state=>state.user);
+
   const navigate = useNavigate();
  
   let fields = {
@@ -43,11 +44,11 @@ function Resetpassword() {
        
     }
   
-    if(data.password.length < 10){  errorMessage("password must be greater than 10 digit")}
+    if(data.password.length < 10) {  errorMessage("password must be greater than 10 digit")}
      if (data.password.length > 10 && data.password != data.repassword){errorMessage("password and re-password must match")}
     
  
-      
+      const email = localStorage.getItem('email');
    
       let senddata = {
         password: data.password,
@@ -64,6 +65,7 @@ function Resetpassword() {
                 notification.success({
                   message: "successfully password changed",
                 });
+                localStorage.removeItem('email');
                 setTimeout(() => {
                   navigate("/login");
                 }, 5000);
