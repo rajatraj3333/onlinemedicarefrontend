@@ -30,7 +30,7 @@ function Routescomponent({children}) {
      
      
     const token = localStorage.getItem('token');
-    setauth(token);
+    // setauth(token);
    
     if(!token){
           
@@ -44,7 +44,7 @@ function Routescomponent({children}) {
          Api.HandleRequest(response,function(data,error){
                   if(data!=null){
                    dispatch(setloginDetails(data.data.response))
-                   navigate('/admin');
+                  //  navigate('/admin');
                   }
          })
         

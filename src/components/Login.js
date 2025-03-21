@@ -60,6 +60,7 @@ function Login() {
             const {token,roles} = data
             if(token){
               
+              localStorage.setItem('token',token);
               setauth(token);
             dispatch(
               setloginDetails({email,token,roles})

@@ -7,7 +7,6 @@ import { Link } from "react-router";
 import {RiInfoCardFill} from '@remixicon/react'
 
 import api from "../utils/api";
-import { useAuth } from "./Userprovider";
 
 const Filtersection = (props) => {
   const {doctorList,doctorDepartment,Filter}=props
@@ -175,10 +174,6 @@ function Booking() {
   const doctorDepartment = [];
   const [list,setList]=useState('');
   const [doctorlist,setdoctorlist]=useState('')
-
-
-const {userdetails}=useAuth();
-
 
   useEffect(()=>{
     api.get('/doctor/getalldoctor').then(res=>{

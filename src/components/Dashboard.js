@@ -6,6 +6,7 @@ import { useNavigate, redirect } from "react-router";
 import moment from "moment/moment";
 import Api from "../utils/apiconnect";
 import { useSelector } from "react-redux";
+import Loader from "./Loader";
 function Userdetails({ data }) {
   
   function cancelappointment(id, date) {
@@ -123,7 +124,7 @@ function Dashboard() {
 
 
   const {roles} = useSelector(state=>state.user);
-
+ 
   console.log(roles);
   function confirm(booking_id, status) {
     updateStatus(booking_id, status);
@@ -131,6 +132,9 @@ function Dashboard() {
 
 
   useEffect(() => {
+    
+    if(roles!==''){
+
     if (roles !== "Patient") {
       const promise = Api.Get("/doctor/bookingdetails");
       Api.HandleRequest(promise, function (data, error) {
@@ -146,6 +150,7 @@ function Dashboard() {
     } else {
       const pro = Api.Get("/doctor/getpatientdetails");
       Api.HandleRequest(pro, function (data, error) {
+       
         if (data != null) {
           setpatientdetails(data.data.response);
           return;
@@ -155,8 +160,8 @@ function Dashboard() {
           });
         }
       });
-    }
-  }, []);
+    }}
+  }, [roles]);
 
   function updateStatus(booking_id, status) {
     let data = {
@@ -181,7 +186,9 @@ function Dashboard() {
   }
 
   return (
+    
     <div className="dashboardWrappers">
+     <Loader data={roles==undefined?false:true}>
       {roles !== "Patient" && (
         <div className="dashboard">
           <div className="detailsCard">
@@ -295,6 +302,7 @@ function Dashboard() {
       {!Array.isArray(patientDetails) && (
         <h2 style={{ textAlign: "center" }}>No Booking Avaliable Right now </h2>
       )}
+</Loader>
     </div>
   );
 }

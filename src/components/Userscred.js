@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./css/usercred.css";
 import { Select } from "antd";
+import { useNavigate } from "react-router";
 function Userscred({
   element,
   buttontext,
@@ -12,7 +13,13 @@ function Userscred({
   onselect,
 }) {
   const [logindetails, setlogindetails] = useState(fields);
-
+  const navigate = useNavigate()
+  useEffect(()=>{
+      const token = localStorage.getItem('token');
+      if(token){
+        navigate('/admin');
+      }
+  },[])
   const { Option } = Select;
   function onchange(e) {
    

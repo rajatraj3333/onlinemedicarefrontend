@@ -5,7 +5,6 @@ import "./css/confirm.css";
 import { Modal, Checkbox, Radio, notification, DatePicker } from "antd";
 import api from "../utils/api";
 
-import { useAuth } from "./Userprovider";
 import moment from "moment";
 import Loader from "./Loader";
 import { useSelector } from "react-redux";
@@ -15,11 +14,9 @@ function Confirm() {
   const [Time, setTime] = useState([]);
   const [mode, setMode] = useState("");
   const [paymentmode, setpaymentmode] = useState("");
-
   const [date, setdate] = useState("");
-  const { userdetails } = useAuth();
   const [bookedslot, setbookslot] = useState("");
-  const [loading, setloading] = useState(true);
+ 
   const [dataload, setdataload] = useState(false);
   const [doctordetails, setdoctordetails] = useState("");
   const time = [
