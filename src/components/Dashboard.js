@@ -8,15 +8,30 @@ import Api from "../utils/apiconnect";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
 function Userdetails({ data }) {
-  
-  function cancelappointment(id, date) {
-    let currentdate = moment().format("DD-MM-YYYY");
-    let bookingdate = moment(date).format("DD-MM-YYYY");
 
-    if (currentdate < bookingdate) {
+  function checkBookingCanCancelled (Boookingdate,status) {
+
+    const currentTime = Date.now();
+    const oneDayTimeInMilliSecond = 24*60*60*1000;
+    const date = new Date(Boookingdate);
+    const MonthDay= date.getDate()
+    const currentDate = new Date().getDate()
+    const bookingTimeInTimeStamp = Date.parse(Boookingdate)
+    const differenceBetwenTime =bookingTimeInTimeStamp-currentTime
+  if((status==='approved' || status ==null) && Math.abs(differenceBetwenTime)>oneDayTimeInMilliSecond && currentDate<MonthDay){
+  return true
+}
+else {
+  return false;
+}
+  }
+  
+  function cancelappointment(id, Boookingdate) {
+   const isCancelled= checkBookingCanCancelled(Boookingdate);
       try {
         let data = { booking_id: id };
 
+        if(isCancelled){
         const response = Api.Post("/doctor/cancelappointment", data);
 
         Api.HandleRequest(response, function (data, error) {
@@ -29,10 +44,12 @@ function Userdetails({ data }) {
               message: error,
             });
           }
+        
         });
+      }
       } catch (err) {
         console.log(err);
-      }
+      
     }
   }
 
@@ -84,7 +101,7 @@ function Userdetails({ data }) {
                 {moment(item.booking_date).format("DD-MM-YYYY")}
               </span>
               {item.booking_status === "approved" ||
-                (item.booking_status == null && (
+                (item.booking_status == null && checkBookingCanCancelled(item.booking_date,item.booking_status) && (
                   <>
                     <span>
                       <a
