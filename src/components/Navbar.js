@@ -26,7 +26,7 @@ export function Navbarlist (){
   };
   return (
 <>
-<Availabilitycheck open={checkavailbility} onClose={setcheckAvailbility}/>
+{/* <Availabilitycheck open={checkavailbility} onClose={setcheckAvailbility}/> */}
 <div className='nav-menu-open' onClick={onCheck}>
 <i class="ri-menu-line" ></i>
 
@@ -39,7 +39,7 @@ export function Navbarlist (){
     <li>
       <Link to='/bookings'><button className='btn'>Book An Appointment </button></Link>
      </li>
-    <li onClick={()=>setcheckAvailbility(!checkavailbility)}>Check Availability</li>
+    {/* <li onClick={()=>setcheckAvailbility(!checkavailbility)}>Check Availability</li> */}
     <li>Services</li>
     <li>About us</li>
 </ul>

@@ -11,6 +11,8 @@ function Userscred({
   containerHeight,
   selectype = false,
   onselect,
+  setguest,
+  isGuest
 }) {
   const [logindetails, setlogindetails] = useState(fields);
   const navigate = useNavigate()
@@ -19,6 +21,7 @@ function Userscred({
       if(token){
         navigate('/admin');
       }
+      
   },[])
   const { Option } = Select;
   function onchange(e) {
@@ -77,6 +80,7 @@ function Userscred({
                 type={element.type}
                 name={element.name}
                 onChange={onchange}
+                value={element.value}
                 required={element.required}
                 className="inputlogin"
                 placeholder={" " + element.placeholder}
@@ -85,9 +89,18 @@ function Userscred({
           </>
         ))}
 
+<div style={{display:'flex',alignItems:'center'}}>
+<span style={{marginTop:'30px',marginRight:'30px'}}>
+{buttontext ==='Login' && <input type="checkbox"
+onChange={()=>setguest(!isGuest)}
+
+/>}Guest
+
+</span>
         <button className="lgnbtn" onClick={save}>
           {buttontext}
         </button>
+</div>
 
         {<Extratext />}
       </div>

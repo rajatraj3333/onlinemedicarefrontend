@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function Login() {
 
+  const [isGuest,setguest]=useState(false)
   const dispatch = useDispatch();
 
   const nav = useNavigate();
@@ -43,7 +44,11 @@ function Login() {
   ]
 
   function validatelogin (data){
-    
+   
+    if(isGuest){
+      data.email='RAJATKUMAR108@HOTMAIL.COM'
+      data.password='12345678910'
+    }
     const {email}=data
     let promise =  Api.Post('/auth/login',data)
    
@@ -83,7 +88,7 @@ function Login() {
   let Extra = ()=>{
     return (
       <div className='footer'>
-
+          
       <span >Don't have Account?</span><a href='/register' className='create'>Create now</a>
       <span className=' create forgetpass' >
         <Link to={'/forgetpassword'}>
@@ -100,7 +105,9 @@ function Login() {
     
     <>
 
-   <Userscred element={elem} buttontext={'Login'} fields={fields}  validation={validatelogin} Extratext={Extra}/>
+   <Userscred element={elem} buttontext={'Login'} fields={fields}  validation={validatelogin} Extratext={Extra}
+   setguest ={setguest} isGuest={isGuest}
+   />
   
 </>
   )
