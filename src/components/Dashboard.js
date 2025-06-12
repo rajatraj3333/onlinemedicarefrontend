@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import Loader from "./Loader";
 function Userdetails({ data }) {
 
+  const navigate = useNavigate()
   function checkBookingCanCancelled (Boookingdate,status) {
-
     const currentTime = Date.now();
     const oneDayTimeInMilliSecond = 24*60*60*1000;
     const date = new Date(Boookingdate);
@@ -25,28 +25,31 @@ else {
   return false;
 }
   }
+
+
   
   function cancelappointment(id, Boookingdate) {
-   const isCancelled= checkBookingCanCancelled(Boookingdate);
-      try {
-        let data = { booking_id: id };
 
-        if(isCancelled){
-        const response = Api.Post("/doctor/cancelappointment", data);
+      try {
+        let data = { booking_id: id ,date:new Date().toLocaleDateString()};
+
+          const response = Api.Post("/doctor/cancelappointment", data);
 
         Api.HandleRequest(response, function (data, error) {
-          if (data != null && data.status === 200) {
-            notification.success({
-              message: data.response,
-            });
-          } else {
-            notification.error({
-              message: error,
-            });
-          }
-        
+         
+          if("error" in data.data)
+            {
+          notification.error({message:data.data.error})
+          return
+        } 
+           if("response" in data.data)
+        {
+          notification.success({message:data.data.response})
+          navigate('/admin')
+        }
+         
         });
-      }
+ 
       } catch (err) {
         console.log(err);
       
@@ -100,8 +103,8 @@ else {
                 <strong className="detailstitle">Bookingdate</strong>{" "}
                 {moment(item.booking_date).format("DD-MM-YYYY")}
               </span>
-              {item.booking_status === "approved" ||
-                (item.booking_status == null && checkBookingCanCancelled(item.booking_date,item.booking_status) && (
+              {
+                (item.booking_status == null  && (
                   <>
                     <span>
                       <a
@@ -136,13 +139,11 @@ else {
 }
 
 function Dashboard() {
-  const navigate = useNavigate();
+ 
   const [patientDetails, setpatientdetails] = useState("");
 
-
   const {roles} = useSelector(state=>state.user);
- 
-  console.log(roles);
+
   function confirm(booking_id, status) {
     updateStatus(booking_id, status);
   }

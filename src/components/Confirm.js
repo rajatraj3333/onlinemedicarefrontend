@@ -52,8 +52,8 @@ function Confirm() {
   }
 
   function dates(date) {
-   
-    setdate(moment(new Date(date)).toISOString());
+
+    setdate(new Date(date).toLocaleDateString());
   }
 
   function disabledate(current) {
@@ -64,11 +64,8 @@ function Confirm() {
  
     let data = {
       doctor_id: id,
-      date:
-        date === undefined
-          ? moment(new Date()).format("DD-MM-YYYY")
-          : moment(new Date(date)).format("DD-MM-YYYY"),
-    };
+      date:date
+    }
 
     api
       .post("/doctor/getdoctordetails", data)
@@ -96,6 +93,7 @@ function Confirm() {
       payment_status: "done",
       mode: mode,
     };
+
 
     api
       .post("/doctor/book", data)

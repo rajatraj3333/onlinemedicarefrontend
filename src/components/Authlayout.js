@@ -80,8 +80,13 @@ function Lidoctor({roles}) {
           <ul
             style={managedropdown ? { display: "block" } : { display: "none" }}
           >
-            <li>Default</li>
-            <li>Daily</li>
+             <Link
+            to={"admin/default"}
+            style={{ textDecoration: "none", color: "#333" }}
+          >
+            Default
+          </Link>
+            {/* <li>Daily</li> */}
           </ul>
         </li>
       )}
@@ -109,6 +114,12 @@ function Authlayout() {
   const dispatch = useDispatch();
   const {roles}=userdetails;
 
+  useEffect(()=>{
+
+  if(userdetails.token.length<1){
+    navigate('/login');
+  }
+  },[])
 
   const items = [
     {

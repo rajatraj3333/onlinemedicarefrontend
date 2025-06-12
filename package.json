@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^2.6.1",
+    "@reduxjs/toolkit": "^2.8.2",
     "@remixicon/react": "^4.5.0",
-    "@stripe/react-stripe-js": "^3.1.1",
-    "@stripe/stripe-js": "^5.5.0",
     "antd": "^5.22.4",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
@@ -18,8 +16,7 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.0.2",
     "react-scripts": "5.0.1",
-    "redux-persist": "^6.0.0",
-    "stripe": "^17.5.0"
+    "redux-persist": "^6.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://omcbackend.onrender.com/"
+   "proxy": "https://omcbackend.onrender.com/"
 }

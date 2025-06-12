@@ -44,8 +44,8 @@ function Resetpassword() {
        
     }
   
-    if(data.password.length < 10) {  errorMessage("password must be greater than 10 digit")}
-     if (data.password.length > 10 && data.password != data.repassword){errorMessage("password and re-password must match")}
+    if(data.password.length < 5) {  errorMessage("password must be at least 5 character")}
+     if (data.password.length >= 5 && data.password != data.repassword){errorMessage("password and re-password must match")}
     
  
       const email = localStorage.getItem('email');

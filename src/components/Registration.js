@@ -4,8 +4,11 @@ import { notification } from 'antd'
 import api from '../utils/api'
 import { useNavigate } from 'react-router'
 import Api from '../utils/apiconnect'
+import { useDispatch } from 'react-redux'
+import { addNewuser } from '../redux/slice/userSlice'
 function Registration() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
       let fields= {
         firstname:'',
         lastname:'',
@@ -49,7 +52,7 @@ function Registration() {
     let d = [data]
   
     if(d.every(item=>item.firstname!=='' && item.lastname!=='' && item.email!=='')){
-        if(data.password.length>=8){
+        if(data.password.length>=5){
      
          let storedata = {
             ...data,
@@ -60,43 +63,57 @@ function Registration() {
          delete storedata.firstname
          delete storedata.lastname
          
+         
 
-        const promise =  Api.Post('/auth/register',storedata)
-        Api.HandleRequest(promise,function(response,error){
-             if(response!=null){
-                const {data}=response;
-                const {token,message}=data;
-                if(message){
-                    notification.error({
-                        message:'User Already Exist'
-                    })
-                }
-                else if(token){
-                    notification.success({
-                        message:'Successfully register'
-                    })
-                    navigate('/login')
-                   }
-                   else if (data.error){
-                    notification.error({
-                        message:data.error
-                    })
-                }
-                else {
-                    notification.error({
-                        message:'Something went wrong!'
-                    })
-                }
-             }
+        // const promise =  Api.Post('/auth/register',storedata)
 
-        })
+
+       let result = dispatch(addNewuser(storedata))
+
+
+       result.then(res=>{
+       
+        if(res.payload?.token && res.payload?.token.length>1){
+            navigate('/login')
+        }
+       })
+      
+ 
+        // Api.HandleRequest(promise,function(response,error){
+        //      if(response!=null){
+        //         const {data}=response;
+        //         const {token,message}=data;
+        //         if(message){
+        //             notification.error({
+        //                 message:'User Already Exist'
+        //             })
+        //         }
+        //         else if(token){
+        //             notification.success({
+        //                 message:'Successfully register'
+        //             })
+        //             navigate('/login')
+        //            }
+        //            else if (data.error){
+        //             notification.error({
+        //                 message:data.error
+        //             })
+        //         }
+        //         else {
+        //             notification.error({
+        //                 message:'Something went wrong!'
+        //             })
+        //         }
+        //      }
+
+        // })
 
      
 
     }
     else {
         notification.error({
-            message: `password at least 8 character long  !`
+            message: `password at least 5 character long  !`
         })
     }
     }
