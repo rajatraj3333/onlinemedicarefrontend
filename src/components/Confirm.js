@@ -53,7 +53,16 @@ function Confirm() {
 
   function dates(date) {
 
-    setdate(new Date(date).toLocaleDateString());
+let d =new Date(date)
+
+let day = d.getDate();
+let month= d.getMonth();
+let year = d.getFullYear()
+d.setUTCDate(day)
+d.setUTCFullYear(year)
+d.setUTCMonth(month)
+
+    setdate(d);
   }
 
   function disabledate(current) {
@@ -105,7 +114,7 @@ function Confirm() {
           });
           
          setTimeout(()=>{
-navigate('/admin')
+         navigate('/admin')
          },2100)
         }
         
