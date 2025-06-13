@@ -101,7 +101,7 @@ else {
               </span>
               <span>
                 <strong className="detailstitle">Bookingdate</strong>{" "}
-                {moment(item.booking_date).format("DD-MM-YYYY")}
+                {new Date(item.booking_date).toDateString()}
               </span>
               {
                 (item.booking_status == null  && (
