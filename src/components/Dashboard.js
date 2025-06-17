@@ -143,7 +143,7 @@ function Dashboard() {
   const [patientDetails, setpatientdetails] = useState("");
 
   const {roles} = useSelector(state=>state.user);
-
+  const navigate = useNavigate();
   function confirm(booking_id, status) {
     updateStatus(booking_id, status);
   }
@@ -179,6 +179,9 @@ function Dashboard() {
         }
       });
     }}
+    else {
+      navigate('/login');
+    }
   }, [roles]);
 
   function updateStatus(booking_id, status) {

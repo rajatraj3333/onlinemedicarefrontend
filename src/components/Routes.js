@@ -12,6 +12,7 @@ import PaymentComponent from "./Payment";
 import Registration from "./Registration";
 import Forgetpass from "./Forgetpass";
 import Resetpassword from "./Resetpassword";
+import UserSetting from "./UserSetting";
 // import MonthCard from "./datesComponent/MonthCard";
 import Doctorregistration from "./Doctorregistration";
 import Management from "./Management";
@@ -23,43 +24,14 @@ import { setloginDetails } from "../redux/slice/userSlice";
 import setauth from "../utils/setauth";
 import { useLocation } from "react-router";
 // import MainComponent from "./datesComponent";
-
+import Clinicdetails from "./Clinicdetails";
 function Routescomponent({ children }) {
   const { email, roles } = useSelector((state) => state.user);
 
   const path = useLocation();
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
 
-  //   let { pathname } = path;
-  //   pathname = pathname.replace("/", "");
-  //   if (
-  //     pathname != undefined &&
-  //     !token &&
-  //     (pathname !== "doctorregistration" || pathname !== "register")
-  //   ) {
-  //     return;
-  //   }
 
-  //   if (!token) {
-  //    navigate("/login");
-  //   }
-
-  //   // setauth(token);
-
-  //   if (!email && !roles && token) {
-  //     console.log("APi Call");
-  //     const response = Api.Post("/auth/verify", { token });
-  //     Api.HandleRequest(response, function (data, error) {
-  //       if (data != null) {
-  //         dispatch(setloginDetails(data.data.response));
-  //         //  navigate('/admin');
-  //       }
-  //     })
-  //   }
-  // }, [])
-
-   const state = useSelector(state=>state.user)
+  const state = useSelector(state=>state.user)
   useEffect(()=>{
     state?.token && setauth(state.token) 
   })
@@ -81,7 +53,8 @@ function Routescomponent({ children }) {
           
         </Route>
         <Route path="payment" element={<PaymentComponent />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<UserSetting />} />
+        <Route path="clinic" element={<UserSetting />} />
       </Route>
       <Route path="login" element={<Login/>} />
       <Route path="register" element={<Registration />} />

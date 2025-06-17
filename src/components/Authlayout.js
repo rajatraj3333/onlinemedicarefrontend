@@ -24,7 +24,7 @@ import { useNavigate } from "react-router";
 import permission from "../utils/permission";
 import { useDispatch, useSelector } from "react-redux";
 import { removeDetails } from "../redux/slice/userSlice";
-
+import api from "../utils/api";
 
 function Lidoctor({roles}) {
   const [managedropdown, setmanagedropdown] = useState(false);
@@ -114,12 +114,7 @@ function Authlayout() {
   const dispatch = useDispatch();
   const {roles}=userdetails;
 
-  useEffect(()=>{
 
-  if(userdetails.token.length<1){
-    navigate('/login');
-  }
-  },[])
 
   const items = [
     {
@@ -150,7 +145,23 @@ function Authlayout() {
   const logout = (e) => {
     localStorage.clear();
     dispatch(removeDetails());
-    navigate("/login");
+    
+    api.get("/auth/logout").then((res) => {
+      if (res.status === 200) {
+        notification.success({
+          message: res.data.response || "Logout successful",
+        });
+        navigate("/login");
+      } else {
+        notification.error({
+          message: res.data.error || "Logout failed",
+        });
+      }
+    }).catch((error) => {
+      notification.error({
+        message:  error.message || "An error occurred during logout",
+      });
+    });
   };
 
   return (
