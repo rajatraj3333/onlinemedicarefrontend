@@ -10,9 +10,9 @@ const Api = {
 
   async Get(url) {
     let result;
-   
+
     try {
-    result =await api.get(url,{ credentials: 'include'});
+   result =await api.get(url,{  withCredentials: true});
       return result;
    } catch (error) {
         return error;
@@ -25,7 +25,7 @@ const Api = {
   async Post(url, data) {
     
     try {
-      return await api.post(url, data,{  credentials: 'include'});
+      return await api.post(url, data,{  withCredentials: true});
     } catch (error) {
       return error;
     }
