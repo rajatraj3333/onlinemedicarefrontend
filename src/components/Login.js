@@ -55,6 +55,7 @@ function Login() {
     let response = dispatch(fetchUserdetails(data));
     response.then((res) => {
       if (res.payload?.token && res.payload?.token.length > 1) {
+        localStorage.setItem("token", res.payload.token);
         navigate("/admin");
       }
     });
