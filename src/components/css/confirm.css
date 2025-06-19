@@ -60,6 +60,7 @@ margin-top: -40px;
 
 .selectTime{
     margin-left: 10%;
+    margin-top: -10px;
 }
 .selectTime button 
 {
@@ -67,7 +68,7 @@ padding: 10px;
 border-radius: 5px;
 
 border: none;
-margin: 20px;
+margin:10px 20px;
 margin-left: 40px;
 /* background-color: ; */
 background-color: #65b031;
@@ -137,6 +138,11 @@ input[type='checkbox']{
     border-radius: 8px;
      border: none;
     color: white;
+}
+
+.datePicker{
+    height: 40px;
+    margin-top: 0px;
 }
 
 @media screen and (max-width:800px) {

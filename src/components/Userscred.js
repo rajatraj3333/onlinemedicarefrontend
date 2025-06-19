@@ -100,10 +100,10 @@ function Userscred({
 
 <div style={{display:'flex',alignItems:'center'}}>
 <span style={{marginTop:'30px',marginRight:'30px'}}>
-{buttontext ==='Login' && <input type="checkbox"
+{/* {buttontext ==='Login' && <input type="checkbox"
 onChange={()=>setguest(!isGuest)}
 
-/>}Guest
+/>}Guest */}
 
 </span>
         <button className="lgnbtn" onClick={save}>

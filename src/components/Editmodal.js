@@ -267,6 +267,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
                 allowClear={false}
                 disabledDate={disabledDate}
                 format={"DD-MM-YYYY"}
+                style={{ width: "140px", marginRight: "15px",height: "30px" }}
               />
             </div>
           </div>
@@ -276,7 +277,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
               placeholder="Name"
               name="names"
               style={{
-                width: "100%",
+               
                 padding: "5px",
                 marginTop: "10px",
                 height: "40px",
@@ -292,7 +293,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
               placeholder="First | Last Name"
               name="firstlastname"
               style={{
-                width: "100%",
+                
                 padding: "5px",
                 marginTop: "10px",
                 height: "40px",
@@ -309,7 +310,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
               name="email"
               required
               style={{
-                width: "100%",
+              
                 padding: "5px",
                 marginTop: "10px",
                 height: "40px",
@@ -327,7 +328,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
               name="password"
               placeholder="Password"
               style={{
-                width: "100%",
+             
                 padding: "5px",
                 marginTop: "10px",
                 height: "40px",

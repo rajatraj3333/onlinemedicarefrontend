@@ -25,6 +25,7 @@ import setauth from "../utils/setauth";
 import { useLocation } from "react-router";
 // import MainComponent from "./datesComponent";
 import Clinicdetails from "./Clinicdetails";
+import ProfileDetails from "./ProfileDetails";
 function Routescomponent({ children }) {
   const { email, roles } = useSelector((state) => state.user);
 
@@ -62,6 +63,7 @@ function Routescomponent({ children }) {
       <Route path="resetpassword/:url" element={<Resetpassword />} />
       <Route path="doctorregistration" element={<Doctorregistration />} />
       <Route path="table" element={<Table />} />
+      <Route path="profiles/:id" element={<ProfileDetails />} />
       </Routes>
   
 )

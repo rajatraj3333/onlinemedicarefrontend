@@ -7,8 +7,9 @@ import moment from "moment/moment";
 import Api from "../utils/apiconnect";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
+import { useLocation } from "react-router";
 function Userdetails({ data }) {
-
+ 
   const navigate = useNavigate()
   function checkBookingCanCancelled (Boookingdate,status) {
     const currentTime = Date.now();
@@ -141,7 +142,8 @@ else {
 function Dashboard() {
  
   const [patientDetails, setpatientdetails] = useState("");
-
+  const [reload, setreload] = useState(false);
+  
   const {roles} = useSelector(state=>state.user);
   const navigate = useNavigate();
   function confirm(booking_id, status) {
@@ -152,7 +154,7 @@ function Dashboard() {
   useEffect(() => {
     
     if(roles!==''){
-
+   
     if (roles !== "Patient") {
       const promise = Api.Get("/doctor/bookingdetails");
       Api.HandleRequest(promise, function (data, error) {
@@ -165,6 +167,7 @@ function Dashboard() {
           });
         }
       });
+      setreload(false);
     } else {
       const pro = Api.Get("/doctor/getpatientdetails");
       Api.HandleRequest(pro, function (data, error) {
@@ -178,12 +181,13 @@ function Dashboard() {
           });
         }
       });
+         setreload(false);
     }}
     else {
       navigate('/login');
     }
-  }, [roles]);
-
+  }, [roles,reload]);
+ 
   function updateStatus(booking_id, status) {
     let data = {
       booking_id,
@@ -197,6 +201,7 @@ function Dashboard() {
         notification.success({
           message: "booking status updated successfully",
         });
+        setreload(true);
         return;
       } else {
         notification.error({

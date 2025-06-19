@@ -1,6 +1,6 @@
 import "./App.css";
 import Routescomponent from "./components/Routes";
-
+import '../src/components/css/styles.css'
 function App() {
   
   

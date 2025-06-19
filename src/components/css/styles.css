@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+.flex{
+  display: flex;
+  margin-top: 10px;
+}
+
+.center {
+      position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+:root{
+    --dark-color-one: #2A2D34 ; /* Gun Metal */
+    --dark-color-two: #011936 ; /* oxford blue */ 
+    --dark-color-three: #264653; /* Charcoal */
+    --green-color-one: #2A9D8F;   /* Persian green */
+    --green-color-two: #009B72 ;   /* Shamrock green */
+    --blue-color-one: #0D3B66;  /* yale blue*/
+    --gray-color-one: #326273 ;
+     --color-one: #E76F51;   /*  burnt sienna */
+     --white-one: #ffffff;
+}
+
+
+
+input:not(#Male,#Female,.paymentselect,.mode2,.mode1), select{
+    width: 400px;
+    height: 40px;
+      margin-top: 20px;
+}
+.inputdiv{
+    /* border: 1px solid saddlebrown; */
+   
+    display: flex;
+    margin:0px;
+}
+sup{
+     color: red;
+    margin-top:10px;
+}
+@media screen and (max-width:580px) {
+   input:not(#Male,#Female,.mode2,.mode1), select{
+    width: 90vw;
+    height: 50px;
+  border-radius: 4px;
+  
+   } 
+}

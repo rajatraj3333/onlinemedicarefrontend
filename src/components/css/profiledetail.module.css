@@ -1,0 +1,96 @@
+.profilecontainer{
+    margin: 40px;
+
+}
+
+.profilesummary>div>.s1>img{
+    width:220px;
+    height: 220px;
+    border-radius: 5px;
+   
+}
+.Summary{
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.s2{
+    margin-right: 200px;
+    margin-top: 30px;
+    display: flex;
+}
+.s2>img{
+    width: 50px;
+    height: 50px;
+   
+}
+.s2>img:nth-child(2n){
+    margin-left: 10px;
+   }
+
+.loc{
+    display: flex;
+    font-size: 0.88em;
+}
+.loc>img{
+    width: 15px;
+    height: 15px;
+   
+}
+.mt20{
+    margin-top: 20px;
+}
+.profilesummarydetails{
+    justify-content: space-between;
+    line-height: 1.5em;
+    flex-wrap: wrap;
+}
+.abthospital{
+flex-basis: 65%;
+
+}
+.abtspec{
+    flex-basis: 30%;
+}
+
+.sepcbtn,.abthosp{
+    background-color: var(--dark-color-three);
+    width: fit-content;
+    height: fit-content;
+    padding: 4px 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.abthosp{
+background-color: var(--green-color-one)
+}
+.btnbook{
+    /* display: flex;
+  */
+
+ 
+    background-color: var(--dark-color-three);
+   /* margin-bottom: 150px; */
+   border: none;
+   padding: 8px 10px;
+   color: white;
+   border-radius: 5px;
+   margin-top: 80px;
+   text-decoration: none;
+
+}
+.btnbook:hover{
+    cursor: pointer;
+}
+
+@media screen and (max-width:780px) {
+    .abthospital{
+flex-basis: 100%;
+margin-top: 20px;
+
+}
+.abtspec{
+    flex-basis: 100%;
+}
+}

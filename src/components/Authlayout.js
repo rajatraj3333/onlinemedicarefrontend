@@ -23,7 +23,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import permission from "../utils/permission";
 import { useDispatch, useSelector } from "react-redux";
-import { removeDetails } from "../redux/slice/userSlice";
+import { removeDetails, setloginDetails } from "../redux/slice/userSlice";
 import api from "../utils/api";
 
 function Lidoctor({roles}) {
@@ -115,6 +115,16 @@ function Authlayout() {
   const {roles}=userdetails;
 
 
+
+
+
+  useEffect(()=>{
+     dispatch(setloginDetails({
+      email: localStorage.getItem("email") || "",
+      token: localStorage.getItem("token") || "",
+      roles: localStorage.getItem("roles") || "",
+     }))     
+  },[])
 
   const items = [
     {

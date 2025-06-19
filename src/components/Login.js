@@ -56,6 +56,8 @@ function Login() {
     response.then((res) => {
       if (res.payload?.token && res.payload?.token.length > 1) {
         localStorage.setItem("token", res.payload.token);
+        localStorage.setItem("email", res.payload.email);
+        localStorage.setItem("roles", res.payload.roles);
         navigate("/admin");
       }
     });

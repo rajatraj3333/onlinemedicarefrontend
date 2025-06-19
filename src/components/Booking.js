@@ -5,7 +5,7 @@ import { Select, DatePicker, Tooltip,Collapse, notification } from "antd";
 import moment from "moment";
 import { Link } from "react-router";
 import {RiInfoCardFill} from '@remixicon/react'
-
+import Styles from './css/card.module.css'
 import api from "../utils/api";
 
 const Filtersection = (props) => {
@@ -104,7 +104,8 @@ const Filtersection = (props) => {
           allowClear={true}
           disabledDate={disabledDate}
           format={"DD-MM-YYYY"}
-          style={{height:'32px'}}
+           className="filterdates"
+          
         />
    <button onClick={reset} className="resetbtn">Reset</button>
       </div>
@@ -125,40 +126,53 @@ const Detailscard = (props) => {
 
 
  return (
-  <>
+  <> 
    { Array.isArray(data) && data.map(element=>(
-      <div className="bookingcard">
-         <img
-        src="/image/ashkan-forouzani-DPEPYPBZpB8-unsplash.jpg"
-        className="doctorimg"
-        />
-        <div className="cardcontent">
-         <div className="title">
-          <p>Docotor Name:</p>
-          <p>Department:</p>
-          <p>Role:</p>
-         </div>
-        <div className="detailedcontent">
-          <p>{element.fullname}</p>
-          <p>{element.department}</p>
-          <p>{element.roles}</p>
+  <div style={{display:'flex',flexWrap:'wrap',marginTop:'10px'}} key={element._id}>
+    <div className={`${Styles.cardContainer} `} style={{margin:'40px'}}>
+        <div className={` flex ${Styles.classImg}${Styles.circle}`}>
+        <img src="/image/ashkan-forouzani-DPEPYPBZpB8-unsplash.jpg" className={`${Styles.avimg} ${Styles.circle}`} alt="Doctor Image"/>
         </div>
+        {/* <!-- Doctor Details --> */}
+          <div className={`${Styles.doctdetails}`}>
+
+              <div className={ `${Styles.doctorName} ${Styles.flex}`}>
+                  <label>Name-</label>
+                  <p> {element.fullname}</p>
+                </div>
+               <div style={{display:'flex',marginTop:'10px'}}>
+                <img src="/image/location-icon.png"/>
+                <p style={{fontSize: '0.65em', marginTop: '2px'}}>AIIMS(New Delhi)</p>
+            </div>
+            <div  style={{marginTop: '40px', display:'flex'}}>
+
+                <div className={`${Styles.specialtylabel} ${Styles.labels}`}>{element.department}</div>
+                <div className={`${Styles.hospitalnamelabel} ${Styles.labels}`}>Medanta</div>
+            </div>
+            <div style={{marginTop: '40px', display:'flex'}}>
+                 
+                <Link  className={`${Styles.booknow} ${Styles.btnset1}`} to={`/bookings/confirm/${element.doctor_id}`}>Book Now</Link>
+                <Link className={`${Styles.aboutdoc} ${Styles.btnset1}`} to={`/profiles/${element.doctor_id}`}>About Doctor</Link>
+            </div>
+        </div>
+    </div>
+ 
         </div>
      
-      <Link to={`/bookings/confirm/${element.doctor_id}`}>
+    
+    
+// {element.review && <Collapse items={element.review} defaultActiveKey={['1']}
+// style={{width:'300px',marginLeft: "-40px",backgroundColor:"#f1f1f1"}}
+// /> }
+
+   /* <Link to={`/bookings/confirm/${element.doctor_id}`}>
       <button className="bkbtn">Book Appointment</button>
-      </Link>
-      {/* <h6>see what people say</h6>
+      </Link> */
+      /* <h6>see what people say</h6>
       <h3 style={{ marginTop: "20px" }}>Review</h3>
       <div className="reviewSection">
     
-      </div> */}
-    
-{element.review && <Collapse items={element.review} defaultActiveKey={['1']}
-style={{width:'300px',marginLeft: "-40px",backgroundColor:"#f1f1f1"}}
-/> }
-
-    </div>
+      </div> */
     ))}
  
 
@@ -252,12 +266,14 @@ function Booking() {
       <Filtersection  doctorList={doctorlist} doctorDepartment={doctorDepartment}
       Filter={Filter}
       /> }
-      <div className="bookingwrapper">
+<div className="flex" style={{flexWrap:'wrap'}}>
+
      {doctorlist &&    <Detailscard data={list}/>  }
+</div>
         {/* <Detailscard />
         <Detailscard />
         <Detailscard /> */}
-      </div>
+   
     </>
   );
 }

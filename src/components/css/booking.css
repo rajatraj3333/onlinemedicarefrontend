@@ -106,9 +106,19 @@ display: flex;
     margin-right: 10px;
    
    }
+.filterdates{
+    height: 32px;
+    width: 95%;
+}
 
-@media screen and (max-width:800px) {
-      .bookingcard{
+   @media screen and (max-width:780px){
+    .bookingwrapper{
+        width: 80%;
+       justify-content: center;
+       position: absolute;
+    }
+
+       .bookingcard{
         margin-left: auto;
         margin-right: 40px;
        
@@ -119,12 +129,21 @@ display: flex;
         margin-left: 0px;
        }
        .filternames, .filterdepartment{
-        margin-left: auto;
-        margin-right: auto;
+   
         width: 100%;
         margin: 10px;
        
        }
-      
 
+   }
+
+
+
+@media screen and (min-width: 800px) {
+      .filterdates{
+    height: 32px;
+    width: 280px;
+}
+  
+    
 }

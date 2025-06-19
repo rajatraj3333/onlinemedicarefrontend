@@ -355,11 +355,11 @@ function Doctor() {
         />
       )}
       <div className="searchBox">
-        <input type="text" className="searchinputbox" onChange={handlesearch} />
-        <button className="sebtn">Search</button>
+        <input type="text" className="searchinputbox" onChange={handlesearch} placeholder="" />
+        <button className="sebtn"  style={{height:'40px'}}>Search</button>
 
         {roles !== "Associate" && (
-          <button className="addbtn" onClick={() => seteditModal(true)}>
+          <button className="addbtn" style={{height:'40px'}} onClick={() => seteditModal(true)}>
             Add
           </button>
         )}

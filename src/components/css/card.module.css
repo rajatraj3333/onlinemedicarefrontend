@@ -1,0 +1,97 @@
+body{
+    background-color: #FAF6F6;
+}
+.cardContainer{
+    border: 1px solid var(--gray-color-one);
+    height: 400px;
+    width: 300px;
+    border-radius: 6px;
+    background-color: #FAF6F6;
+    box-shadow: 2px 2px var(--gray-color-one);
+    margin: 40px;
+
+}
+
+.circle{
+width: 100px;
+height: 100px;
+border-radius: 100%;
+}
+
+
+.avimg{
+   /* background:url('./imgav1.jpg'); */
+    background-size: contain;
+    background-position: center;
+    margin:auto;
+
+}
+
+.doctdetails{
+    margin: 20px;
+}
+p{
+    font-size: 0.85em;
+    /* word-spacing: 6px; */
+    margin-left: 10px;   
+}
+.doctdetails img{
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+}
+
+.labels{
+   width:fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: 0.8em;
+       color: white;
+}
+
+.labels:hover{
+    /* background-image:none; */
+    /* background-color: white; */
+    opacity: 0.8;
+    color: white;
+    cursor: pointer;
+    border: 1px solid;
+}
+
+.specialtylabel{
+ 
+  
+    /* color: whitesmoke; */
+    background-image: linear-gradient(135deg, #B2FEFA 10%, #0ED2F7 100%);
+    background-image: linear-gradient(135deg, #1e3c72 10%, #2a5298 100%);
+   
+}
+.hospitalnamelabel{
+background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
+margin-left: 20px;
+background-image: linear-gradient(135deg, #96deda 10%, #50c9c3 100%);
+/* color: var(--dark-color-one); */
+}
+
+.btnset1{
+ padding: 5px 20px;
+    font-size: 0.8em;
+    margin-top: 10px;
+    color: whitesmoke;
+    background-color: var(--dark-color-three);
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+}
+.btnset1:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.aboutdoc{
+   margin-left: 20px;
+}
+
+

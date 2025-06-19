@@ -228,8 +228,9 @@ d.setUTCMonth(month)
               onChange={dates}
               disabledDate={disabledate}
               style={{ width: "200px" }}
+              className="datePicker"
             />
-            <button onClick={(e) => setopen(true)} disabled={date === ""}>
+            <button style={{marginTop:'-10px'}} onClick={(e) => setopen(true)} disabled={date === ""}>
               select time
             </button>
 
