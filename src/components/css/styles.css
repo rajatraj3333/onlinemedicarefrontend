@@ -30,7 +30,7 @@
 
 
 
-input:not(#Male,#Female,.paymentselect,.mode2,.mode1), select{
+input:not(#Male,#Female,.paymentselect,.mode2,.mode1,.inputlogin), select{
     width: 400px;
     height: 40px;
       margin-top: 20px;
@@ -46,7 +46,7 @@ sup{
     margin-top:10px;
 }
 @media screen and (max-width:580px) {
-   input:not(#Male,#Female,.mode2,.mode1), select{
+   input:not(#Male,#Female,.mode2,.mode1,.inputlogin), select{
     width: 90vw;
     height: 50px;
   border-radius: 4px;

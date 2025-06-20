@@ -214,11 +214,12 @@ function Doctor() {
       fullname: data.firstlastname,
       email: data.email,
       password: data.password,
-      roles: data.roles,
+      roles: data.role,
       department: data.department,
       joiningdate: data.joiningdate,
       lastdate: "-",
       fees: 1500,
+      gender: data.gender
     };
 
     // api.get('/health').then(res=>console.log(res))

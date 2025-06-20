@@ -15,6 +15,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
     role: "Select",
     department: data.department,
     joiningdate: "",
+    gender:""
   });
 
   const {roles} = useSelector(state=>state.user);
@@ -41,7 +42,16 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
         ...details,
         ["department"]: e,
       });
-    } else {
+
+    }
+    else if (type ==='gender'){
+      setDetails({
+        ...details,
+        ["gender"]: e,
+      });
+    }
+    
+    else {
       setDetails({
         ...details,
         ["role"]: e,
@@ -81,7 +91,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
       let errorpass = handlingElement.createelement("p", {
         attrname: "id",
         attrvalue: "passwordp",
-        errormessage: "password must be greter than 10 character",
+        errormessage: "password must be greter than 7 character",
       });
 
       let element = document.getElementsByName("password")[0];
@@ -189,11 +199,11 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
 
     check();
     let checks = [
-      details.password.length >= 10,
+      details.password.length >= 8,
       details.email.includes("@"),
       details.names.length,
       details.firstlastname.length,
-      details.role != "Select",
+      details.role != "Select" && details.role != "" ,
       details.department != "Select",
       details.joiningdate != "",
     ];
@@ -207,6 +217,7 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
     invalidatecheck(checks[6], "joinp", null);
 
     if (checks.every((ele) => ele != 0)) {
+    
       saves(details);
     }
   }
@@ -339,6 +350,19 @@ function Editmodal({ isModalOpen, handleOk, handleCancel, saves, data }) {
               onChange={change}
             />
           </div>
+                 <div id="selects" ref={rolesref}>
+              <Select
+                defaultValue={"Gender"}
+                style={{ width: "80%", marginRight: "15px" }}
+                onChange={(val) => change(val,"gender")}
+              >
+           
+   <Option value="Male">Male</Option>
+         <Option value="Female">Female</Option>
+         <Option value="Other">Other</Option>
+
+              </Select>
+            </div>
         </fieldset>
       </Modal>
     </div>

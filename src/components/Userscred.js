@@ -13,13 +13,13 @@ function Userscred({
   fields,
   containerHeight,
   selectype = false,
-  onselect,
-  setguest,
-  isGuest
+  isLoginPage
+
 }) {
   const [logindetails, setlogindetails] = useState(fields);
   const navigate = useNavigate()
   const userState = useSelector(state=>state.user) 
+
   useEffect(()=>{
       const token = localStorage.getItem('token');
       if(token){
@@ -31,20 +31,29 @@ function Userscred({
       
   },[])
   const { Option } = Select;
-  function onchange(e) {
+  function onchange(e,type) {
    
     if (e != null && (e.target != null) | undefined) {
       setlogindetails({
         ...logindetails,
         [e.target.name]: e.target.value,
       });
-    } else {
+    }
+    
+    else  if(type==='department'){
       setlogindetails({
         ...logindetails,
         ["department"]: e,
       });
     }
+     else  if(type==='gender'){
+      setlogindetails({
+        ...logindetails,
+        ["gender"]: e,
+      });
+    }
   }
+
   function save() {
     validation(logindetails);
   }
@@ -73,7 +82,8 @@ function Userscred({
             <Select
               style={{ width: "200px", marginTop: "10px" }}
               placeholder={"Select"}
-              onChange={(value) => onchange(value)}
+              onChange={(value) => onchange(value,"department")}
+              
               >
               <Option value="pediatrician">pediatrician</Option>
               <Option value="neurologist">neurologist</Option>
@@ -97,13 +107,21 @@ function Userscred({
             )}
           </>
         ))}
+{!isLoginPage &&
+        <Select 
+        style={{width:'80%',height:'45px',margin:'20px'}}
+         placeholder='Gender'
+           onChange={(value) => onchange(value,"gender")}
+           id="genders"
+         >
+          <Option value="Male">Male</Option>
+          <Option value="Female">Female</Option>
+          <Option value="Other">Other</Option>
+        </Select>}
 
 <div style={{display:'flex',alignItems:'center'}}>
 <span style={{marginTop:'30px',marginRight:'30px'}}>
-{/* {buttontext ==='Login' && <input type="checkbox"
-onChange={()=>setguest(!isGuest)}
 
-/>}Guest */}
 
 </span>
         <button className="lgnbtn" onClick={save}>
