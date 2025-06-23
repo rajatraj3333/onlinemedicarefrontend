@@ -35,7 +35,7 @@
     padding:10px 30px;
     border-radius: 4px;
     border: none;
-    background-color: #2525b5cd;
+    background-color: #62A1A7;
     color: #ffffff;
      margin-top: 20px;
 }
@@ -71,6 +71,10 @@
     text-align: center;
 }
 
+.dctable thead{
+      background-color: #66798F;
+      color: white;
+}
 
 .dctable tr td{
     padding: 15px 20px;

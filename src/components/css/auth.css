@@ -56,16 +56,16 @@
 }
 .menu-item li {
     line-height: 50px;
-    /* display: flex; */
-    text-align: center;
-    justify-content: center;
-}
+ 
 
+}
+ul>li{
+    text-decoration: none !important;
+ 
+}
 .menu-item li:hover{
     background-color: aliceblue;
-    height: 50px;
-    text-align: center;
-    align-items: center;
+
     border-bottom: 1px solid #e8e4e4;
     cursor: pointer;
 }

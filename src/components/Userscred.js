@@ -61,7 +61,16 @@ function Userscred({
   return (
     <>
     <Loader>
-    <div className="credwrapper">
+      <div class="container">
+        {/* <!-- Animated background shapes --> */}
+        <div class="bg-shape-1"></div>
+        <div class="bg-shape-2"></div>
+        <div class="bg-shape-3"></div>
+        
+        {/* <!-- Left side - Branding --> */}
+  
+      
+    {/* <div className="credwrapper"> */}
     <div
       className="credcontainer"
       style={{
@@ -132,7 +141,9 @@ function Userscred({
         {<Extratext />}
       </div>
     </div>
-    </div>
+       </div>
+    {/* </div> */}
+   
     </Loader>
 </>
   );
