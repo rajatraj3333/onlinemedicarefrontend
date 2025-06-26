@@ -53,7 +53,7 @@ function Forgetpass() {
         if (response != null) {
           const { data } = response;
 
-          if ("message" in data && data.status===200) {
+          if ("message" in data && data.status!==200) {
             notification.error({
               message: data.message,
             });
