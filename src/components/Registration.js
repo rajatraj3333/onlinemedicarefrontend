@@ -146,7 +146,7 @@ function Registration() {
         validation={validateRegistration}
         buttontext={buttontext}
         fields={fields}
-       
+        isLoginPage={true}
       />
     </div>
   );

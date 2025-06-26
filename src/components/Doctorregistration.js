@@ -107,6 +107,7 @@ function Doctorregistration() {
         selectype={true}
         buttontext={"Signup"}
         containerHeight={"550px"}
+        isLoginPage={true}
       />
     </Loader>
   );
