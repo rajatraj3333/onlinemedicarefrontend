@@ -53,7 +53,7 @@ function Forgetpass() {
         if (response != null) {
           const { data } = response;
 
-          if ("message" in data) {
+          if ("message" in data && data.status===200) {
             notification.error({
               message: data.message,
             });
@@ -61,7 +61,7 @@ function Forgetpass() {
 
           if (data.status === 200) {
             notification.success({
-              message: "otp send successfully",
+              message: data.message,
             });
             setotpsend(true);
           }
@@ -101,6 +101,7 @@ function Forgetpass() {
         otpsend={otpsend}
         buttontext={otpsend ? "Verify" : "Send"}
         validation={otpvalidation}
+        
       />
     </div>
   );
