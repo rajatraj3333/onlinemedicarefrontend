@@ -87,7 +87,7 @@ function Login() {
         Extratext={Extra}
         setguest={setguest}
         isGuest={isGuest}
-        isLoginPage={true}
+      
       />
     </>
   );
