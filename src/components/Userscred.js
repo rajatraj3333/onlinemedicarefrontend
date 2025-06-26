@@ -31,6 +31,7 @@ function Userscred({
       
   },[])
   const { Option } = Select;
+
   function onchange(e,type) {
    
     if (e != null && (e.target != null) | undefined) {
@@ -116,7 +117,7 @@ function Userscred({
             )}
           </>
         ))}
-{!isLoginPage &&
+{isLoginPage &&
         <Select 
         style={{width:'80%',height:'45px',margin:'20px'}}
          placeholder='Gender'
