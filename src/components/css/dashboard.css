@@ -1,16 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-body{
-    background-color: #C0CBD8;
-}
 
 .dashboardWrappers{
-    width: 90%;
+    /* width: 90%; */
     /* background-color: #eeecec2d; */
     height: auto;
     /* margin: 40px; */
     border-radius: 8px;
-   
+
     padding-top: 40px;
     overflow-x: hidden;    
 background-color:'#DDE1E4' !important;
@@ -54,20 +51,22 @@ margin-top: -10px;
 .dashboardtable{
     margin: 40px;
     padding: 10px;
-    width: 90%;
+    width: auto;
     margin-right: 20px;
     border-collapse:collapse;
     /* margin-top: 20px; */
     border-radius: 13px;
-
+    
     background-color:#fff;
     font-family: "Inter", serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     border: 1px solid rgba(204, 201, 201, 0.322);
     border-radius: 8px;
+    /* overflow-x: scroll; */
+    /* border: 2px solid salmon; */
 }
 
 .dashboardtable thead {
@@ -83,7 +82,7 @@ margin-top: -10px;
 .dashboardtable td {
     text-align: center;
     /* border: 1px solid magenta; */
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #d6d3d3;
 
 }
@@ -172,6 +171,57 @@ line-height: 2rem;
     display: flex;
 }
 
+.dbfilter{
+    display: flex;
+    /* justify-content: space-evenly; */
+    justify-content: flex-end;
+}
+.dbfilter>button:first-of-type{
+    background-color: #ffffff;
+   border-color: hsla(160, 81%, 52%, 0.8);
+ 
+}
+.dbfilter>button{
+      padding: 8px;
+   border-radius: 6px;
+}
+.dbfilter>button:hover{
+  cursor: pointer;
+    border: none;
+
+      color: #ffffff;
+}
+.dbfilter>button:first-of-type:hover{
+  background-color:hsla(160, 81%, 52%, 0.8);
+  }
+  .dbfilter>button:nth-child(2){
+           background-color: #ffffff;
+   border-color: hsla(0, 91%, 50%, 0.8);
+  }
+    .dbfilter>button:nth-child(2):hover{
+                   color: #ffffff;
+        background-color: hsla(0, 73%, 52%, 0.8);
+    }
+
+    .filter-date::placeholder{
+       color: red;
+    }
+
+    .uploadfile{
+        width: 200px;
+        /* border: 2px solid goldenrod; */
+        overflow: hidden;
+    }
+    .uploadfile::placeholder{
+        display: none;
+    }
+
+    .uploadbutton{
+        padding: 5px;
+        background-color: #65b031;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
 @media screen and (max-width:800px) {
     
     .userwrapper{

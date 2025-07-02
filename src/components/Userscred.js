@@ -93,12 +93,12 @@ function Userscred({
               style={{ width: "200px", marginTop: "10px" }}
               placeholder={"Select"}
               onChange={(value) => onchange(value,"department")}
-              
+            
               >
-              <Option value="pediatrician">pediatrician</Option>
-              <Option value="neurologist">neurologist</Option>
-              <Option value="general physcian">general physcian</Option>
-              <Option value="dentist">dentist</Option>
+              <Option value="pediatrician"   className="selectGender">pediatrician</Option>
+              <Option value="neurologist"  className="selectGender">neurologist</Option>
+              <Option value="general physcian"  className="selectGender">general physcian</Option>
+              <Option value="dentist"  className="selectGender">dentist</Option>
             </Select>
           </div>
         )}
@@ -123,10 +123,11 @@ function Userscred({
          placeholder='Gender'
            onChange={(value) => onchange(value,"gender")}
            id="genders"
+           
          >
-          <Option value="Male">Male</Option>
-          <Option value="Female">Female</Option>
-          <Option value="Other">Other</Option>
+          <Option value="Male" className="selectGender">Male</Option>
+          <Option value="Female" className="selectGender">Female</Option>
+          <Option value="Other" className="selectGender">Other</Option>
         </Select>}
 
 <div style={{display:'flex',alignItems:'center'}}>

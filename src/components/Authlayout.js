@@ -33,7 +33,7 @@ function Lidoctor({roles}) {
     <>
       {permission.dashboard.includes(roles) && (
         <li>
-          <Link to={"admin/"} style={{ textDecoration: "none", color: "#333" }}>
+          <Link to={"admin/"} style={{ textDecoration: "none"}} className="Authlinks">
             Dashboard{" "}
           </Link>
         </li>
@@ -42,7 +42,8 @@ function Lidoctor({roles}) {
         <li>
           <Link
             to={"admin/doctor"}
-            style={{ textDecoration: "none", color: "#333" }}
+            style={{ textDecoration: "none" }}
+            className="Authlinks"
           >
             Doctor{" "}
           </Link>
@@ -54,7 +55,7 @@ function Lidoctor({roles}) {
       {permission.bookinghistory.includes(roles) && (
         <li>
           {" "}
-          <Link to={"admin/"} style={{ textDecoration: "none", color: "#333" }}>
+          <Link to={"admin/"} style={{ textDecoration: "none"}} className="Authlinks">
             booking history{" "}
           </Link>
         </li>
@@ -63,7 +64,8 @@ function Lidoctor({roles}) {
         <li>
           <Link
             to={"admin/setting"}
-            style={{ textDecoration: "none", color: "#333" }}
+            style={{ textDecoration: "none" }}
+            className="Authlinks"
           >
             Setting
           </Link>
@@ -82,7 +84,8 @@ function Lidoctor({roles}) {
           >
              <Link
             to={"admin/default"}
-            style={{ textDecoration: "none", color: "#333" }}
+            style={{ textDecoration: "none" }}
+            className="Authlinks"
           >
             Default
           </Link>
@@ -175,7 +178,7 @@ function Authlayout() {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <div className="nav_bar">
         <div className="authlogo">
           {menuOpen ? (
@@ -190,11 +193,11 @@ function Authlayout() {
             <Dropdown
               overlay={
                 <Menu>
-                  <Menu.Item key="0">
-                    <Link to={"/profile"}>Profile</Link>
+                  <Menu.Item key="0" className="menus">
+                    <Link to={"/profile"} className="Authlinks">Profile</Link>
                   </Menu.Item>
-                  <Menu.Item key="1" onClick={logout}>
-                    Logout
+                  <Menu.Item key="1" onClick={logout} className="menus">
+                 <Link to={''} className="Authlinks"> Logout</Link>  
                   </Menu.Item>
                 </Menu>
               }
@@ -223,7 +226,8 @@ function Authlayout() {
                 <li>
                   <Link
                     to={"/bookings"}
-                    style={{ textDecoration: "none", color: "#333" }}
+                    style={{ textDecoration: "none" }}
+                    className="Authlinks"
                   >
                     book
                   </Link>

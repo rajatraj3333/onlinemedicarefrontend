@@ -26,6 +26,9 @@ import { useLocation } from "react-router";
 // import MainComponent from "./datesComponent";
 import Clinicdetails from "./Clinicdetails";
 import ProfileDetails from "./ProfileDetails";
+import OAuthPage from "./OAuthPage";
+import GoogleMeetApp from "./Gmeet";
+
 function Routescomponent({ children }) {
   const { email, roles } = useSelector((state) => state.user);
 
@@ -64,6 +67,10 @@ function Routescomponent({ children }) {
       <Route path="doctorregistration" element={<Doctorregistration />} />
       <Route path="table" element={<Table />} />
       <Route path="profiles/:id" element={<ProfileDetails />} />
+      <Route path="gmeet" element={<GoogleMeetApp />} />
+      <Route path="auth/callback" element={<OAuthPage />} />
+
+      
       </Routes>
   
 )

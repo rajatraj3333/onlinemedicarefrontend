@@ -56,17 +56,30 @@
 }
 .menu-item li {
     line-height: 50px;
- 
+    color: #333; 
 
 }
 ul>li{
     text-decoration: none !important;
- 
+    color: red;
 }
 .menu-item li:hover{
-    background-color: aliceblue;
-
-    border-bottom: 1px solid #e8e4e4;
+   
+    background-color: #7167F4;
+   
     cursor: pointer;
+    color: white !important;
+    transition:ease-in-out 0.5s;
 }
 
+.menus:hover{
+    background-color: #7167F4 !important;
+    color: #ffffff;
+}
+
+.Authlinks{
+    color: #333;
+}
+.Authlinks:hover{
+   color: white;
+}

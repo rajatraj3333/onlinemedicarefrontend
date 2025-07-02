@@ -23,7 +23,8 @@ left: 50%;
     flex-direction: column;
 }
 .footer{
-    margin-top: 30px;
+    /* margin-top: 30px; */
+    padding-bottom: 50px;
     /* margin-left: 40px; */
 }
 .create{
