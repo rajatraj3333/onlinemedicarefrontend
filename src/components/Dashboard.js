@@ -380,7 +380,7 @@ function Dashboard() {
   const gmeetlink  =async()=>{
        const res = await api.get('gmeet/auth/url');
         const { url } = await res.json();
-        // console.log(url);
+        console.log(url);
         localStorage.setItem('bid',Gmeetref.current)
         localStorage.setItem('bookingtime',datetime)
         setverify(url);
@@ -412,7 +412,7 @@ function Dashboard() {
       // onOk={onOk}
     />
     <button disabled={!(Gmeetref.current && datetime) ?? true} onClick={gmeetlink}>Generate link</button>
-    <a  href={verify??verify}>Verify</a>
+    <a  href={verify}>Verify</a>
     
     </Space>
         </Modal>}
