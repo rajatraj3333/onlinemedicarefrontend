@@ -146,7 +146,7 @@ else {
               {item.filename!=null && item.filename!='' &&
              <span>
                 <strong className="detailstitle" style={{overflow:'hidden',textOverflow:'ellipsis'}}>Download Report</strong>{" "}
-               <a href={`http://localhost:5000/uploads/${item.filename}`} download="file-1751348296389-137495360.pdf"> Download</a>
+               <a href={`https://onlinemedicares.netlify.app/uploads/${item.filename}`} download="file-1751348296389-137495360.pdf"> Download</a>
               </span>}
             </div>
           </div>
@@ -350,7 +350,7 @@ function Dashboard() {
     // console.log(fileref.current.files,uploadFiles);
       //  console.log(formData);
 
-         const response =  axios.post('http://localhost:5000/api/file/upload',formData,{
+         const response =  api.post('/file/upload',formData,{
     headers:{
     'Content-Type':'multipart/form-data'
     }
@@ -378,7 +378,7 @@ function Dashboard() {
   }
 //  console.log(Gmeetref.current)
   const gmeetlink  =async()=>{
-       const res = await fetch('http://localhost:5000/api/gmeet/auth/url');
+       const res = await api.get('gmeet/auth/url');
         const { url } = await res.json();
         // console.log(url);
         localStorage.setItem('bid',Gmeetref.current)
