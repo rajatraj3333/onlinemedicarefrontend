@@ -17,7 +17,7 @@ function OAuthPage() {
   const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
   // fetch(`http://localhost:5000/api/gmeet/auth/callback?code=${code}`)
-//  console.log(code) 
+ console.log(code) 
  let bid = localStorage.getItem('bid');
  let bookingtime = localStorage.getItem('bookingtime')
     if (code) {
@@ -35,6 +35,8 @@ function OAuthPage() {
             // console.log(data)
       if(data.error){
         notification.error({message:data.error})
+           localStorage.removeItem('bid');
+          localStorage.removeItem('bookingtime');
         return;
       }
         if(data.meetLink){
