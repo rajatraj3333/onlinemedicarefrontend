@@ -379,8 +379,9 @@ function Dashboard() {
 //  console.log(Gmeetref.current)
   const gmeetlink  =async()=>{
        const res = await api.get('gmeet/auth/url');
-        const { url } = await res.json();
-        console.log(url);
+        const { url } = res.data
+
+        // console.log(res.data.url);
         localStorage.setItem('bid',Gmeetref.current)
         localStorage.setItem('bookingtime',datetime)
         setverify(url);
@@ -512,7 +513,7 @@ function Dashboard() {
 <button className="uploadbutton" onSubmit={(e)=>savefile(e,item.booking_id)} >Submit</button>
 </form>
 
-{item.booking_status==='approved' && item.meetinglink===null &&  Math.floor((new Date(item.booking_date) - new Date()) / 1000 * 60 * 60 * 24)>0 && 
+{item.booking_status==='approved' && (item.meetinglink===null || item.meetinglink=='') &&  Math.floor((new Date(item.booking_date) - new Date()) / 1000 * 60 * 60 * 24)>0 && 
 <button onClick={(e)=>createmeetlink(e,item.booking_id)}>Gmeet</button>}
                 </td>
                   {roles != "Patient" && item.booking_status == null && (

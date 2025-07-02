@@ -5,7 +5,7 @@ import Api from '../utils/apiconnect';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGmeetDetails } from '../redux/slice/gmeet';
 import { notification } from 'antd';
-
+import api from '../utils/api';
 function OAuthPage() {
  const [meetLink, setMeetLink] = useState('');
  const navigate = useNavigate()
@@ -22,24 +22,16 @@ function OAuthPage() {
  let bookingtime = localStorage.getItem('bookingtime')
     if (code) {
       // Send this code to the backend to exchange it for a token and create a Meet link
-        fetch(`https://omcbackend.onrender.com/api/gmeet/auth/callback`,{
-          method:'post',
-          headers: {
-      'Content-Type': 'application/json',
-      },
-      body:JSON.stringify({code,booking_id:bid,bookingtime})
-        })
-        .then(res => res.json())
-        .then(data => {
+        api.post(`/gmeet/auth/callback`,{code,booking_id:bid,bookingtime}).then(data => {
             // console.log(data.meetLink.split('/'))
-            // console.log(data)
-      if(data.error){
-        notification.error({message:data.error})
+            // console.log(data.data)
+      if(data.data.error){
+        notification.error({message:data.data.error})
            localStorage.removeItem('bid');
           localStorage.removeItem('bookingtime');
         return;
       }
-        if(data.meetLink){
+        if(data.data.meetLink){
    
           localStorage.removeItem('bid');
           localStorage.removeItem('bookingtime');
