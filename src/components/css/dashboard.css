@@ -9,7 +9,7 @@
     border-radius: 8px;
 
     padding-top: 40px;
-    overflow-x: hidden;    
+    /* overflow-x: hidden;     */
 background-color:'#DDE1E4' !important;
 }
 
@@ -79,12 +79,27 @@ margin-top: -10px;
     padding: 10px;
 }
 
-.dashboardtable td {
-    text-align: center;
-    /* border: 1px solid magenta; */
-    padding: 0px;
-    border: 1px solid #d6d3d3;
+table{
+    padding: 0;
+    margin: 15px;
+ border-collapse: collapse;
+ margin-left: 25px;
+ /* overflow-x: scroll !important; */
+ overflow: scroll;
+ width: 90%;
+}
 
+thead{
+ 
+
+}
+
+td {
+   
+    /* text-align: center; */
+    font-size: 15px;
+    width: 90%;
+    padding: 12px;
 }
 
 td button {
@@ -208,17 +223,20 @@ line-height: 2rem;
     }
 
     .uploadfile{
-        width: 200px;
+        width: auto;
         /* border: 2px solid goldenrod; */
-        overflow: hidden;
+        /* overflow: hidden; */
+        display: flex;
     }
     .uploadfile::placeholder{
         display: none;
     }
 
     .uploadbutton{
-        padding: 5px;
-        background-color: #65b031;
+        height: 33px;
+        margin-top: 20px;
+       
+        background-color: #65b031 !important;
         color: #ffffff;
         margin-bottom: 10px;
     }

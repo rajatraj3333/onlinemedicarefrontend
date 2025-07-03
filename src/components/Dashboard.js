@@ -140,13 +140,13 @@ else {
             <div className="col-4">
            
               <span>
-                <strong className="detailstitle" style={{overflow:'hidden',textOverflow:'ellipsis'}}>conferenceLink</strong>{" "}
+                <strong className="detailstitle" >conferenceLink</strong>{" "}
                <a href={item.meetinglink} target="_blank">   {item.meetinglink!=null?item.meetinglink:'not available'} </a>
               </span>
 
               {item.filename!=null && item.filename!='' &&
              <span>
-                <strong className="detailstitle" style={{overflow:'hidden',textOverflow:'ellipsis'}}>Download Report</strong>{" "}
+                <strong className="detailstitle">Download Report</strong>{" "}
                <a href={`https://onlinemedicares.netlify.app/uploads/${item.filename}`} download="file-1751348296389-137495360.pdf"> Download</a>
               </span>}
             </div>
@@ -412,7 +412,7 @@ function Dashboard() {
      let diffinms = new Date(currentTime)-new Date();
      console.log(Math.floor(diffinms/msInDay)<0)
       if(Math.floor(diffinms/msInDay)<0){
-       settimeboundmessage('time must be lesser than current hour/date/time')
+       settimeboundmessage('time must be greater than current hour/date/time')
       }
       else 
       {
@@ -455,51 +455,7 @@ function Dashboard() {
     <div className="dashboardWrappers">
     
      <Loader data={roles==undefined?false:true}>
-      {/* {roles !== "Patient" && (
-        <div className="dashboard">
-          <div className="detailsCard">
-            Total patient 1555
-            <span
-              style={{
-                display: "block",
-                fontSize: "12px",
-                marginTop: "30px",
-                fontWeight: "bold",
-                padding: "5px",
-              }}
-            >
-              *No patient book online appointment
-            </span>
-          </div>
-          <div className="detailsCard">
-            Today Appointment 109
-            <span
-              style={{
-                display: "block",
-                fontSize: "12px",
-                marginTop: "50px",
-                fontWeight: "bold",
-                padding: "5px",
-                
-              }}
-            ></span>
-          </div>
-          <div className="detailsCard">
-            Total Cancel
-            <span
-              style={{
-                display: "block",
-                fontSize: "12px",
-                marginTop: "10px",
-                fontWeight: "bold",
-                padding: "15px",
-              }}
-            >
-              *Number of appointment cancel by doctor/patient
-            </span>
-          </div>
-        </div>
-      )} */}
+    
        <Filter filterData={filterData} />
       {roles === "Patient" ? (
         <>
@@ -507,18 +463,20 @@ function Dashboard() {
         <Userdetails data={patientDetails}  />
         </>
       ) : (
-        <table className="dashboardtable">
+        <table className="">
           <thead>
-            <tr>
-              <th>patient Name</th>
-              <th>Mode</th>
-              <th>Status</th>
-              <th>Timing</th>
-              <th>Booking Date</th>
+            <tr >
+              <th >patient Name</th>
+              <th >Mode</th>
+              <th >Status</th>
+              <th >Timing</th>
+              <th >Date</th>
 
-              <th>Report Download</th>
+              <th >Download</th>
 
               {roles != "Patient" && <>
+  <th >upload</th>
+  <th>Gmeet</th>
                <th>Action </th>
               <th>conferenceLink</th>
               </>
@@ -530,33 +488,41 @@ function Dashboard() {
             {Array.isArray(patientDetails) &&
               patientDetails.map((item) => (
                 <tr>
-                  <td>{item.fullname}</td>
-                  <td>{item.mode}</td>
-                  <td>{item.booking_status}</td>
-                  <td>{item.slottime}</td>
-                  <td> {moment(item.booking_date).format("DD-MM-YYYY")}</td>
-                  <td>
+                  <td >{item.fullname}</td>
+                  <td >{item.mode}</td>
+                  <td >{item.booking_status}</td>
+                  <td >{item.slottime}</td>
+                  <td > {moment(item.booking_date).format("DD-MM-YYYY")}</td>
+                  <td >
                     <a>Download</a>
                   </td>
-                <td>
-                    <form onSubmit={(e)=>savefile(e,item.booking_id)} className="uploadfile"  >
+             
+                <td >
+   {item.booking_status === 'approved' ?
+   <form onSubmit={(e)=>savefile(e,item.booking_id)} className="uploadfile"  >
 
   
-<label>Upload a file</label>
+
 <input type='file'   name='file' ref={fileref} onChange={uploadFile} />
 
 <button className="uploadbutton" onSubmit={(e)=>savefile(e,item.booking_id)} >Submit</button>
 </form>
+:'Not Available'
+}
+</td>
+<td>
 
-{item.booking_status==='approved' && (item.meetinglink===null || item.meetinglink=='') &&  Math.floor((new Date(item.booking_date) - new Date()) / 1000 * 60 * 60 * 24)>0 && 
-<button onClick={(e)=>createmeetlink(e,item.booking_id)}>Gmeet</button>}
-                </td>
-                  {roles != "Patient" && item.booking_status == null && (
+{item.booking_status==='approved' && (item.meetinglink===null || item.meetinglink=='') &&  Math.floor((new Date(item.booking_date) - new Date()) / 1000 * 60 * 60 * 24)>0 ? 
+<button onClick={(e)=>createmeetlink(e,item.booking_id)}>Gmeet</button>:'Not Available'}
+</td>
+                
+                  {roles != "Patient" && item.booking_status == null ?(
                     <td
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",
                       }}
+                  
                     >
                       <Popconfirm
                         title="Are you sure confirm appointment"
@@ -583,8 +549,8 @@ function Dashboard() {
                     
                 
                     </td>
-                  )}
-                  <td><a href={item.meetinglink} target="_blank">{item.meetinglink}</a></td>
+                  ):<td>No Action</td>}
+                  <td><a href={item.meetinglink} target="_blank" style={{color:'blue',marginLeft:'30px',display:'block'}}>Join</a></td>
                 </tr>
               ))}
           </tbody>

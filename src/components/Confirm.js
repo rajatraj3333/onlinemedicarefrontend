@@ -131,6 +131,14 @@ d.setUTCMonth(month)
       .catch((err) => console.log(err));
   }
 
+
+  let confirmBtndisabled = mode === "" ?1:0
+   confirmBtndisabled += Time.length===0?1:0
+   confirmBtndisabled += date===''?1:0
+      confirmBtndisabled += date===''?1:0
+    confirmBtndisabled += paymentmode===''?1:0
+confirmBtndisabled =confirmBtndisabled>0?1:0
+
   return (
     <div className="wrapper">
       <Loader data={dataload}>
@@ -176,10 +184,10 @@ d.setUTCMonth(month)
                 style={{ display: "flex", flexDirection: "column" }}
               >
                 <Radio value={"offline"}>Offline(Walk-In)</Radio>
-                <Radio value={"online"} style={{ marginTop: "10px" }}>
+                <Radio value={"online"} style={{ marginTop: "20px" }}>
                   Online
                 </Radio>
-                <Radio value={"telephonic"} style={{ marginTop: "10px" }}>
+                <Radio value={"telephonic"} style={{ marginTop: "20px" }}>
                   Telephonic
                 </Radio>
               </Radio.Group>
@@ -274,7 +282,7 @@ d.setUTCMonth(month)
           <div className="confirmbtn">
             <button
               className="cnbtn"
-              disabled={mode === "" || !Time.length || date === "" || paymentmode===''}
+              disabled={confirmBtndisabled}
               onClick={confirm}
             >
               Confirm

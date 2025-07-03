@@ -140,6 +140,14 @@ input[type='checkbox']{
     color: white;
 }
 
+.cnbtn:disabled{
+    background-color: #97c178;
+    cursor:not-allowed;
+}
+.cnbtn:hover{
+    cursor: pointer;
+}
+
 .datePicker{
     height: 40px;
     margin-top: 0px;
