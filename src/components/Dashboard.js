@@ -31,6 +31,7 @@ else {
   }
 
 
+  const msInDay = 1000 * 60 * 60 *24;
   
   function cancelappointment(id, Boookingdate) {
 
@@ -108,7 +109,7 @@ else {
                 {new Date(item.booking_date).toDateString()}
               </span>
               {
-                (item.booking_status == null  && (
+                (item.booking_status == null  && Math.floor((new Date(item.booking_date)-new Date())/msInDay)>=1 && (
                   <>
                     <span>
                       <a
@@ -230,7 +231,10 @@ function Dashboard() {
   const [openModal,setModal]=useState(false)
   const [datetime,setdateTime]=useState();
   const [verify,setverify]=useState();
+  const [timeboundmessage,settimeboundmessage]=useState('')
 
+  const msInDay = 1000 * 60 * 60 *24;
+  
   const navigate = useNavigate();
   function confirm(booking_id, status) {
     updateStatus(booking_id, status);
@@ -240,6 +244,7 @@ function Dashboard() {
   // console.log(patientdetailsRef);
   // console.log(patientDetails);
   // console.log(gmeetdetails);
+  console.log(datetime);
 
   const filterData=(value,type)=>{
 
@@ -390,16 +395,43 @@ function Dashboard() {
   // console.log(bookingIdref.current)
   // console.log(datetime)
   // console.log(Gmeetref.current) 
+
+    function disabledDate(current) {
+
+      let diffinms = new Date(current)-new Date();
+      if(Math.floor(diffinms/msInDay)<=-2){
+        return true
+      }
+      else 
+      {
+        return false
+      }
+    }
+  function disabletime (currentTime){
+    // console.log(new Date(currentTime))
+     let diffinms = new Date(currentTime)-new Date();
+     console.log(Math.floor(diffinms/msInDay)<0)
+      if(Math.floor(diffinms/msInDay)<0){
+       settimeboundmessage('time must be lesser than current hour/date/time')
+      }
+      else 
+      {
+     settimeboundmessage('')
+      }
+  }
   return (
     <>
     
       {openModal &&  <Modal
-          title="Add Employee"
+          title="Conference Time"
         open={openModal}
         style={{ width: "800px" ,zIndex:999999}}
         // onOk={save}
         // onCancel={handleCancel}
-
+        okText={'Verify'}
+        onCancel={()=>setModal(false)}
+      onOk={()=>  verify !=undefined  && document.location.replace(verify)}
+      okButtonProps={{disabled: verify ===undefined }}
       >
         <h1>Test</h1>
         <Space direction="vertical" size={12}>
@@ -408,12 +440,15 @@ function Dashboard() {
       onChange={(value, dateString) => {
         // console.log('Selected Time: ', value);
         setdateTime(dateString)
+        disabletime(dateString)
         // console.log('Formatted Selected Time: ', dateString);
       }}
+      disabledDate={disabledDate}
+      
       // onOk={onOk}
     />
-    <button disabled={!(Gmeetref.current && datetime) ?? true} onClick={gmeetlink}>Generate link</button>
-    <a  href={verify}>Verify</a>
+    <button disabled={!(Gmeetref.current && datetime && timeboundmessage==='') ?? true} onClick={gmeetlink}>Generate link</button>
+   {timeboundmessage && <p  style={{color:'red'}}>{`[${timeboundmessage}]`}</p>}
     
     </Space>
         </Modal>}
