@@ -656,7 +656,12 @@ function Dashboard() {
                         )}
                       </td>
 
-                      {roles != "Patient" && item.booking_status == null ? (
+                      {roles != "Patient" && item.booking_status == null ?      Math.floor(
+                          ((new Date(item.booking_date) - new Date()) / 1000) *
+                            60 *
+                            60 *
+                            24
+                        ) > 0 && (
                         <td
                           style={{
                             display: "flex",
