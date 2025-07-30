@@ -61,6 +61,7 @@ function Routescomponent({ children }) {
         <Route path="clinic" element={<UserSetting />} />
       </Route>
       <Route path="login" element={<Login/>} />
+      <Route path="/" element={<Login/>} />
       <Route path="register" element={<Registration />} />
       <Route path="forgetpassword" element={<Forgetpass />} />
       <Route path="resetpassword/:url" element={<Resetpassword />} />
