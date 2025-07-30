@@ -42,5 +42,10 @@
       "last 1 safari version"
     ]
   },
-   "proxy": "https://omcbackend.onrender.com/"
+   "proxy": "https://omcbackend.onrender.com/",
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "^5.8.3"
+  }
 }
