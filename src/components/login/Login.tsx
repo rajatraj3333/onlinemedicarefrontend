@@ -16,6 +16,10 @@ function Login() {
   useErrorHooks();
   const { dispatch, navigate } = useHooks();
   function validatelogin(data: storeData | Fields) {
+   if(data.email===""||data.password==="") {
+    notification.error({message:'invalid details'})
+    return;
+   }
     // Only proceed if data is of type storeData (has required properties)
     if (  "password" in data && "email" in data ) {
       let response = dispatch(fetchUserdetails(data as storeData));
