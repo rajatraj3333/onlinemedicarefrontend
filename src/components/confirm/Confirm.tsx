@@ -67,8 +67,17 @@ d.setUTCMonth(month)
     setdate(d);
   }
 
+const disabledDates = doctordetails?.notavailable?.map(date =>
+  moment(date, "DD-MM-YYYY")
+);
   function disabledate(current:any) {
-    return moment() >= current;
+    if(disabledDates?.some(disabledDay =>
+    current.isSame(disabledDay, "day")
+  )){
+      return true
+  };
+
+    return moment() > current;
   }
 
   useEffect(() => {
@@ -315,4 +324,8 @@ confirmBtndisabled =confirmBtndisabled>0?1:0
 }
 
 export default Confirm;
+
+function dayjs(date: string, arg1: string): any {
+  throw new Error("Function not implemented.");
+}
 

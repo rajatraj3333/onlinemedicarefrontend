@@ -44,7 +44,10 @@ function Forgetpass() {
 
   function otpvalidation(data:{email:string,otp:number|string}) {
     
-
+   if(data.email==="" && data.otp===""){
+    notification.error({message:'email field can not be empty'})
+    return;
+   }
 
     if (data.otp === "") {
       

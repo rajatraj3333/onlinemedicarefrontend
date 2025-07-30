@@ -37,6 +37,7 @@ type DoctorDetails ={
     fullname:string,
     department:string,
     fees:string|number
+    notavailable?:string[]
 }
 
 export type ClinicResponse = {
